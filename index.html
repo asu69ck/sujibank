@@ -315,8 +315,12 @@ h1 .n{font-family:var(--num);font-size:38px;font-weight:900;letter-spacing:-.02e
 #ad-cats .cat[aria-pressed="true"] .ic{box-shadow:none}
 
 /* 往左滑刪除 */
-.swipe{position:relative;overflow:hidden}
-.swipe-del{position:absolute;top:0;right:0;bottom:1px;width:88px;background:var(--coral);color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;visibility:hidden}
+.swipe{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.swipe .row{border-bottom:0}
+.swipe-del{position:absolute;top:0;right:0;bottom:1px;width:64px;display:flex;align-items:center;justify-content:flex-end;visibility:hidden}
+.swipe-del span{width:46px;height:46px;border-radius:50%;background:var(--coral);color:#fff;display:grid;place-items:center}
+.swipe-del svg{width:22px;height:22px}
+.swipe-del:active span{transform:scale(.92)}
 .swipe.show-del .swipe-del{visibility:visible}
 .swipe .row{position:relative;background:var(--paper);transition:transform .22s ease;touch-action:pan-y}
 .swipe .row.drag{transition:none}
@@ -358,7 +362,7 @@ const CATS = {
   '禮品':['禮',0],'手續費':['費',60],'辦公':['文',210],'保險':['保',170],
   'BTS':['防',265],'演唱會':['演',285],'吉伊卡哇':['吉',335],'動漫':['漫',300],'扭蛋':['蛋',50],'夾娃娃':['夾',25],'訂閱':['訂',230],'出遊玩樂':['遊',180]
 };
-const INC = {'薪水':['薪',120],'退款':['退',140],'發票':['票',100],'彩票':['彩',80],'買賣':['賣',150],'其他收入':['收',130]};
+const INC = {'薪水':['薪',120],'退款':['退',140],'發票':['票',100],'彩券':['彩',80],'買賣':['賣',150],'其他收入':['收',130]};
 const PARTS = ['門票','住宿','交通','應援','周邊','吃喝','其他'];
 const HUES = [262,335,200,20,150,45];
 const WD = '日一二三四五六';
@@ -569,7 +573,7 @@ function rowHTML(r, opts={}){
   else if (due){ cls = 'due'; amt = money(r.a) + (r.paid ? `<small>已付 ${money(r.paid)}</small>` : ''); }
   else amt = money(r.a);
   const stamp = due ? (r.paid ? '<span class="tag part">部分待付</span>' : '<span class="tag due">待付</span>') : '';
-  return `<div class="swipe"><button class="swipe-del" data-swdel="${r.id}" tabindex="-1">刪除</button><button class="row" data-edit="${r.id}">${icHTML(r.k, r.t)}<span class="row-main"><span class="row-t">${esc(r.n || r.k)}</span>${subs.length ? `<span class="row-s">${subs.join('　')}</span>` : ''}</span>${stamp}<span class="row-a ${cls}">${amt}</span></button></div>`;
+  return `<div class="swipe"><button class="swipe-del" data-swdel="${r.id}" tabindex="-1" aria-label="刪除"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></span></button><button class="row" data-edit="${r.id}">${icHTML(r.k, r.t)}<span class="row-main"><span class="row-t">${esc(r.n || r.k)}</span>${subs.length ? `<span class="row-s">${subs.join('　')}</span>` : ''}</span>${stamp}<span class="row-a ${cls}">${amt}</span></button></div>`;
 }
 function dayHTML(d, rs){
   const x = pdate(d), n = diffDays(TODAY, d);
@@ -1033,7 +1037,7 @@ function toast(msg, undo){
 
 
 /* ---------- 往左滑刪除 ---------- */
-const SW_W = 88;
+const SW_W = 76;
 let swOpen = null, swEnd = 0, sw = null;
 function swSet(row, x, anim){
   row.classList.toggle('drag', !anim);
