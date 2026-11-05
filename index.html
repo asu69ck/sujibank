@@ -313,6 +313,16 @@ h1 .n{font-family:var(--num);font-size:38px;font-weight:900;letter-spacing:-.02e
 #ad-cats .cat .ic{width:28px;height:28px;font-size:13px}
 #ad-cats .cat[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--ink);color:var(--ink);font-weight:800}
 #ad-cats .cat[aria-pressed="true"] .ic{box-shadow:none}
+
+/* 往左滑刪除 */
+.swipe{position:relative;overflow:hidden}
+.swipe-del{position:absolute;top:0;right:0;bottom:1px;width:88px;background:var(--coral);color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;visibility:hidden}
+.swipe.show-del .swipe-del{visibility:visible}
+.swipe .row{position:relative;background:var(--paper);transition:transform .22s ease;touch-action:pan-y}
+.swipe .row.drag{transition:none}
+.swipe .row:active{opacity:1}
+.swipe .row:active > *{opacity:.6}
+.swipe.gone{transition:max-height .22s ease,opacity .22s ease;max-height:0 !important;opacity:0}
 </style>
 </head>
 <body>
@@ -559,7 +569,7 @@ function rowHTML(r, opts={}){
   else if (due){ cls = 'due'; amt = money(r.a) + (r.paid ? `<small>已付 ${money(r.paid)}</small>` : ''); }
   else amt = money(r.a);
   const stamp = due ? (r.paid ? '<span class="tag part">部分待付</span>' : '<span class="tag due">待付</span>') : '';
-  return `<button class="row" data-edit="${r.id}">${icHTML(r.k, r.t)}<span class="row-main"><span class="row-t">${esc(r.n || r.k)}</span>${subs.length ? `<span class="row-s">${subs.join('　')}</span>` : ''}</span>${stamp}<span class="row-a ${cls}">${amt}</span></button>`;
+  return `<div class="swipe"><button class="swipe-del" data-swdel="${r.id}" tabindex="-1">刪除</button><button class="row" data-edit="${r.id}">${icHTML(r.k, r.t)}<span class="row-main"><span class="row-t">${esc(r.n || r.k)}</span>${subs.length ? `<span class="row-s">${subs.join('　')}</span>` : ''}</span>${stamp}<span class="row-a ${cls}">${amt}</span></button></div>`;
 }
 function dayHTML(d, rs){
   const x = pdate(d), n = diffDays(TODAY, d);
@@ -1021,9 +1031,65 @@ function toast(msg, undo){
   t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), undo ? 5000 : 2600);
 }
 
+
+/* ---------- 往左滑刪除 ---------- */
+const SW_W = 88;
+let swOpen = null, swEnd = 0, sw = null;
+function swSet(row, x, anim){
+  row.classList.toggle('drag', !anim);
+  row.style.transform = x ? `translateX(${x}px)` : '';
+  row.parentElement.classList.toggle('show-del', x < 0);
+}
+function swClose(){ if (swOpen){ swSet(swOpen, 0, true); swOpen = null; } }
+document.addEventListener('touchstart', e => {
+  const row = e.target.closest('.swipe > .row');
+  if (swOpen && row !== swOpen && !e.target.closest('.swipe-del')) swClose();
+  if (!row || e.touches.length > 1) { sw = null; return; }
+  const t0 = e.touches[0];
+  sw = {row, x0:t0.clientX, y0:t0.clientY, base: row === swOpen ? -SW_W : 0, dir:0, x:0};
+}, {passive:true});
+document.addEventListener('touchmove', e => {
+  if (!sw) return;
+  const t0 = e.touches[0], dx = t0.clientX - sw.x0, dy = t0.clientY - sw.y0;
+  if (!sw.dir){
+    if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+    sw.dir = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
+    if (sw.dir === 'v'){ sw = null; return; }
+  }
+  e.preventDefault();
+  let x = sw.base + dx;
+  if (x > 0) x = 0;
+  if (x < -SW_W) x = -SW_W - (-SW_W - x) * 0.3;
+  sw.x = x; swSet(sw.row, x, false);
+}, {passive:false});
+document.addEventListener('touchend', () => {
+  if (!sw) return;
+  if (sw.dir === 'h'){
+    swEnd = Date.now();
+    if (sw.x < -SW_W / 2){ swSet(sw.row, -SW_W, true); swOpen = sw.row; }
+    else { swSet(sw.row, 0, true); if (swOpen === sw.row) swOpen = null; }
+  }
+  sw = null;
+});
+document.addEventListener('touchcancel', () => { if (sw && sw.dir === 'h') swSet(sw.row, 0, true); sw = null; });
+function swDelete(id, btn){
+  const r = S.records.find(x => x.id === id); if (!r) return;
+  const before = S.records.slice(), box = btn.closest('.swipe');
+  swOpen = null;
+  box.style.maxHeight = box.offsetHeight + 'px'; box.offsetHeight; box.classList.add('gone');
+  setTimeout(() => {
+    S.records = S.records.filter(x => x.id !== id); save();
+    box.remove(); render(true);
+    toast(`已刪除　${r.n || r.k}`, () => { S.records = before; save(); render(true); });
+  }, 220);
+}
+
 /* ---------- wiring ---------- */
 document.addEventListener('click', e => {
   const b = e.target.closest('button,[data-close]');
+  if (b && b.dataset.swdel){ e.preventDefault(); return swDelete(b.dataset.swdel, b); }
+  if (Date.now() - swEnd < 400){ e.preventDefault(); e.stopPropagation(); return; }
+  if (swOpen){ swClose(); if (b && b.closest('.swipe')){ e.preventDefault(); return; } }
   if (!b) return;
   const d = b.dataset;
   if ('close' in d) return closeSheet();
