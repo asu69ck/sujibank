@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="酥雞銀行">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1F2024" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Huninn&family=Nunito:wght@300;600;700;800;900&display=swap" rel="stylesheet">
+<title>酥雞銀行</title>
+<style>
+:root{
+  --paper:#FFFFFF; --surface:#FFFFFF; --surface-2:#F4F3EF; --ink:#1F2024; --ink-2:#6E7077; --ink-3:#A8AAB1; --line:#ECEBE6;
+  --yellow:#F8DC6E; --blue:#A8CFF4; --blue-ink:#3C7DC0; --coral:#F07F55; --on:#1F2024; --pale:rgba(255,255,255,.62);
+  --num:"Nunito",ui-rounded,"SF Pro Rounded",-apple-system,sans-serif;
+  --sans:"Huninn",ui-rounded,"SF Pro Rounded","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1F2024; --surface:#2A2B31; --surface-2:#2F3036; --ink:#F4F2EC; --ink-2:#A7A9B0; --ink-3:#6D6F77; --line:#36383F;
+    --yellow:#F1D466; --blue:#93BDE8; --blue-ink:#A8CFF4; --coral:#EE8B66; --pale:rgba(255,255,255,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1F2024; --surface:#2A2B31; --surface-2:#2F3036; --ink:#F4F2EC; --ink-2:#A7A9B0; --ink-3:#6D6F77; --line:#36383F;
+  --yellow:#F1D466; --blue:#93BDE8; --blue-ink:#A8CFF4; --coral:#EE8B66; --pale:rgba(255,255,255,.5);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;font-synthesis:none}
+body.lock{overflow:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:inherit}
+input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue-ink);outline-offset:2px;border-radius:6px}
+.wrap{max-width:540px;margin:0 auto;padding:0 20px calc(104px + env(safe-area-inset-bottom,0px))}
+.n{font-family:var(--num)}
+
+/* header */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);margin:0 -20px;padding:12px 20px 10px}
+.titlerow{display:flex;align-items:flex-end;gap:8px;min-height:48px}
+h1{font-size:30px;font-weight:800;margin:0;line-height:1.1;letter-spacing:.02em}
+h1 .n{font-family:var(--num);font-size:38px;font-weight:900;letter-spacing:-.02em;margin-right:2px}
+.yr{color:var(--ink-3);font-family:var(--num);font-weight:600;font-size:15px;padding-bottom:4px}
+.nav{margin-left:auto;display:flex;gap:2px;align-self:center}
+.icon-btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ink)}
+.icon-btn:active{background:var(--surface-2)}
+.icon-btn svg{width:21px;height:21px}
+
+/* summary: the yellow block with a blue block peeking out behind it */
+.sum{position:relative;margin:8px 0 22px;padding:20px 22px 18px;background:var(--yellow);color:var(--on);border-radius:28px;overflow:hidden}
+.sum.alt{background:var(--blue)}
+.sum-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:0 16px}
+.sum-side{text-align:right;padding-top:1px}
+.sum-side .sum-label{opacity:.7}
+.sum-side-v{margin:4px 0 0;font-family:var(--num);font-size:24px;font-weight:900;line-height:1.2}
+.sum-side-v .yen{font-size:15px;margin-right:1px}
+.sum-label{position:relative;margin:0;font-size:13px;font-weight:800;letter-spacing:.06em}
+.sum-big{position:relative;margin:4px 0 12px;font-family:var(--num);font-size:46px;font-weight:900;letter-spacing:-.02em;line-height:1.05}
+.sum-big .yen{font-size:24px;font-weight:600;margin-right:2px}
+.metas{position:relative;display:flex;flex-wrap:wrap;gap:8px;font-size:13px;font-weight:700}
+.metas > *{background:rgba(255,255,255,.72);color:var(--on);padding:5px 12px;border-radius:14px}
+.metas b{font-family:var(--num);font-weight:700;margin-left:5px}
+.metas .due-m{background:var(--coral);color:#fff}
+.sum-sub{position:relative;margin:0;display:flex;flex-wrap:wrap;gap:4px 18px;font-size:13px;font-weight:700;opacity:.72}
+.sum-sub b{font-family:var(--num);font-weight:800;margin-left:5px}
+.muted{color:var(--ink-2);font-size:13px;margin:0}
+/* yellow card: total on the left, concert box on the right */
+.sum.has-gig{display:grid;grid-template-columns:minmax(0,1fr) 118px;gap:12px;align-items:stretch}
+.sum.has-gig .sum-big{font-size:min(44px,10.5vw)}
+.sum.has-gig .sum-sub{flex-direction:column;gap:2px}
+.gig{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;padding:12px 12px 11px;border-radius:20px;background:rgba(255,255,255,.8);color:var(--on);text-align:left}
+.gig-l{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:800;opacity:.6}
+.gig-l svg{width:13px;height:13px}
+.gig-n{font-size:14px;font-weight:800;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px}
+.gig-d{font-family:var(--num);font-size:12px;font-weight:700;opacity:.65}
+.gig-c{margin-top:auto;padding-top:6px;font-size:12px;font-weight:800}
+.gig-c b{font-family:var(--num);font-size:24px;font-weight:900;margin-right:3px}
+.gig-more{font-size:11px;font-weight:700;opacity:.55}
+.side-box{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;padding:12px;border-radius:20px;background:rgba(255,255,255,.8);color:var(--on)}
+.side-v{font-family:var(--num);font-size:34px;font-weight:900;line-height:1.1}
+.side-v small{font-size:18px;margin-left:1px}
+/* stats */
+.view-seg{margin:0 0 16px}
+.pie{position:relative;width:236px;max-width:70%;margin:6px auto 16px}
+.pie svg{display:block;width:100%;height:auto}
+.pie-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.pie-c b{font-family:var(--num);font-size:22px;font-weight:900}
+.dot{flex:none;width:16px;height:16px;border-radius:50%;margin:0 12px 0 4px}
+
+.sec{font-size:15px;font-weight:800;color:var(--ink);margin:28px 0 10px}
+.sec-row{display:flex;align-items:baseline;justify-content:space-between}
+.sec-row .sec + .sec{font-family:var(--num);font-weight:700;color:var(--ink-2)}
+.link{color:var(--blue-ink);font-size:14px;font-weight:700;padding:6px 0}
+
+/* days */
+.day{padding-top:16px;scroll-margin-top:calc(80px + env(safe-area-inset-top,0px))}
+.day-h{display:flex;align-items:center;gap:8px;padding-bottom:4px}
+.day-n{font-family:var(--num);font-size:26px;font-weight:900;line-height:1;min-width:30px}
+.day-w{font-size:13px;color:var(--ink-2);font-weight:600}
+.day-w b{margin-left:6px;background:var(--blue);color:var(--on);font-size:11px;font-weight:800;padding:2px 8px;border-radius:10px}
+.day-sum{margin-left:auto;color:var(--ink-2);font-family:var(--num);font-weight:600;font-size:15px}
+.day-add{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:var(--ink-3)}
+.day-add svg{width:17px;height:17px}
+.later{margin-top:30px;display:flex;justify-content:space-between;align-items:baseline}
+.later .sec{margin:0}
+.card{background:transparent}
+.row{display:flex;align-items:center;gap:12px;width:100%;padding:10px 0;min-height:58px;border-bottom:1px solid var(--line)}
+.row:active{opacity:.6}
+.ic{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:17px;font-weight:800;color:var(--on);background:var(--yellow)}
+.ic.t-fun{background:var(--blue)}
+.ic.t-inc{background:var(--surface-2);color:var(--ink)}
+.row-main{flex:1;min-width:0;display:flex;flex-direction:column}
+.row-t{font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row-s{font-size:12px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row-s .evtag{color:var(--blue-ink);font-weight:700}
+.row-a{font-family:var(--num);font-size:17px;font-weight:800;white-space:nowrap;text-align:right}
+.row-a small{display:block;font-size:11px;font-weight:600;color:var(--ink-2)}
+.row-a.inc{color:var(--blue-ink)}
+.row-pct{font-size:11px;font-weight:600;color:var(--ink-3);display:block}
+
+/* small corner tag, like the label on a book cover */
+.tag{flex:none;font-size:11px;font-weight:800;padding:3px 9px;border-radius:10px;line-height:1.2;white-space:nowrap}
+.tag.due{background:var(--coral);color:#fff}
+.tag.part{background:linear-gradient(90deg,var(--blue) 50%,var(--coral) 50%);color:var(--on)}
+
+.empty{text-align:center;padding:40px 16px;color:var(--ink-2)}
+.empty p{margin:0 0 16px}
+.blank{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px;border:2px dashed var(--line);border-radius:20px;color:var(--ink-3);font-size:14px;margin-top:4px}
+.blank span:last-child{color:var(--ink);font-weight:800;background:var(--yellow);padding:4px 12px;border-radius:14px;color:var(--on)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 26px;border-radius:24px;background:var(--yellow);color:var(--on);font-size:16px;font-weight:800}
+.btn:active{transform:scale(.97)}
+.btn.wide{width:100%;margin-top:22px}
+.btn.danger{background:transparent;color:var(--coral);box-shadow:none;border:1.5px solid currentColor}
+
+/* segmented */
+.seg{display:flex;background:var(--surface-2);border-radius:22px;padding:3px;gap:2px}
+.seg button{flex:1;height:34px;border-radius:18px;font-size:14px;font-weight:700;color:var(--ink-2);text-align:center;padding:0 12px;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--yellow);color:var(--on)}
+
+/* fun */
+.stack{position:relative;display:flex;height:10px;overflow:hidden;gap:3px;margin:14px 0 2px;border-radius:5px}
+.stack i{display:block;min-width:4px;background:var(--surface);border-radius:5px}
+.stack i:nth-child(4n+2){background:var(--on);opacity:.75}
+.stack i:nth-child(4n+3){background:var(--yellow)}
+.stack i:nth-child(4n){background:rgba(255,255,255,.45)}
+.budget{position:relative;margin:12px 0 2px}
+.budget-track{height:8px;background:rgba(255,255,255,.6);border-radius:3px;overflow:hidden}
+.budget-fill{height:100%;background:var(--on)}
+.budget-fill.over{background:var(--coral)}
+.budget-txt{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:6px}
+
+/* event tickets: colour block with the other colour offset behind */
+.tickets{display:flex;flex-direction:column;gap:16px}
+/* concert ticket: main part + tear-off stub, notched at the perforation */
+.ticket{--stub:92px;--notch:11px;position:relative;display:flex;width:100%;border-radius:20px;background:var(--tk,var(--yellow));color:var(--tk-ink,var(--on));text-align:left;
+  -webkit-mask:radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 0,#0000 96%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 100%,#0000 96%,#000) bottom/100% 51% no-repeat;
+          mask:radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 0,#0000 96%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 100%,#0000 96%,#000) bottom/100% 51% no-repeat}
+.ticket .tk-parts span{color:#1F2024}
+.ticket.used{opacity:.88}
+.tk-main{position:relative;flex:1;min-width:0;padding:15px 14px 16px 20px;display:flex;flex-direction:column}
+.tk-head{display:flex;align-items:center;gap:8px;font-family:var(--num);font-size:12px;font-weight:800}
+.tk-no{opacity:.55;letter-spacing:.08em}
+.tk-kind{background:var(--tk-ink,var(--on));color:var(--tk,#fff);font-family:var(--sans);font-size:10px;padding:2px 8px;border-radius:8px;letter-spacing:.1em}
+.tk-name{font-size:19px;font-weight:800;line-height:1.3;margin-top:6px;padding-right:58px}
+.tk-total{font-family:var(--num);font-size:30px;font-weight:900;margin-top:4px;letter-spacing:-.01em}
+.tk-total .yen{font-size:17px;margin-right:2px}
+.tk-parts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:12px;font-weight:700}
+.tk-parts span{background:rgba(255,255,255,.72);padding:4px 10px;border-radius:12px}
+.tk-parts b{font-family:var(--num);margin-left:4px}
+.tk-due{margin-top:8px;align-self:flex-start}
+.tk-stub{flex:none;width:var(--stub);border-left:2px dashed color-mix(in srgb,var(--tk-ink,#1F2024) 30%,transparent);background:rgba(255,255,255,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 6px;text-align:center}
+.tk-m{font-size:12px;font-weight:800}
+.tk-d{font-family:var(--num);font-size:36px;font-weight:900;line-height:1.05}
+.tk-w{font-size:11px;font-weight:700;opacity:.7}
+.tk-to{font-family:var(--num);font-size:11px;font-weight:800;opacity:.7;margin-top:2px}
+.tk-code{margin-top:10px;width:58px;height:24px;border-radius:2px;opacity:.8;background:repeating-linear-gradient(90deg,var(--tk-ink,#1F2024) 0 2px,transparent 2px 4px,var(--tk-ink,#1F2024) 4px 5px,transparent 5px 7px,var(--tk-ink,#1F2024) 7px 10px,transparent 10px 11px,var(--tk-ink,#1F2024) 11px 12px,transparent 12px 15px)}
+.tk-used{position:absolute;right:12px;top:12px;border:2px solid var(--coral);color:var(--coral);border-radius:10px;padding:2px 8px;font-size:12px;font-weight:900;transform:rotate(-10deg);letter-spacing:.1em;background:rgba(255,255,255,.35)}
+.ticket.static{cursor:default;margin:6px 0 18px;width:auto}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.sw{position:relative;width:36px;height:36px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--ink)}
+.sw-custom{background:conic-gradient(#F8DC6E,#F5B49A,#F7C3D6,#C9B6F2,#A8CFF4,#B9E3C6,#F8DC6E);overflow:hidden;cursor:pointer}
+.sw-custom input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.tk-color{margin:-4px 0 6px}
+
+/* stats */
+.bars{display:flex;align-items:flex-end;gap:6px;height:170px;padding:20px 2px 0}
+.bars button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px}
+.bars .b{width:100%;max-width:20px;border-radius:10px;background:var(--blue);min-height:3px}
+.bars button[aria-pressed="true"] .b{background:var(--yellow);}
+.bars .bl{font-family:var(--num);font-size:12px;font-weight:600;color:var(--ink-3)}
+.bars button[aria-pressed="true"] .bl{color:var(--ink);font-weight:800}
+.hbar{height:5px;background:var(--surface-2);margin-top:6px;overflow:hidden;border-radius:3px}
+.hbar i{display:block;height:100%;background:var(--yellow)}
+.hbar.t-fun i{background:var(--blue)}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.kpi{padding:14px 16px;border-radius:22px;background:var(--surface-2)}
+.kpi p{margin:0}
+.kpi .v{font-family:var(--num);font-size:24px;font-weight:900}
+
+/* settings */
+.set{background:var(--surface-2);border-radius:22px;overflow:hidden}
+.set-row{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.set-row:last-child{border-bottom:0}
+.set-row .grow{flex:1}
+.set-row .val{color:var(--ink-2);font-family:var(--num);font-weight:600}
+.set-row.act{color:var(--blue-ink);font-weight:700}
+.set-row.red{color:var(--coral);font-weight:700}
+.set-pad{padding:14px 16px}
+.hint{font-size:13px;color:var(--ink-2);margin:8px 2px 0;line-height:1.6}
+.numin{width:120px;text-align:right;border:0;background:var(--surface);border-radius:14px;height:36px;padding:0 12px;font-family:var(--num);font-weight:700;font-size:16px}
+.txtin{width:100%;border:0;background:var(--surface-2);border-radius:18px;height:46px;padding:0 12px;font-size:16px}
+.set .txtin{background:var(--surface)}
+.steps{margin:0;padding-left:20px;color:var(--ink-2);font-size:14px}
+.steps li{margin:4px 0}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:34px;padding:0 14px;border-radius:17px;background:var(--surface-2);font-size:14px;font-weight:700;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.set .chip{background:var(--surface)}
+.chip[aria-pressed="true"]{background:var(--yellow);color:var(--on)}
+.chip.dashed{background:transparent;border:1.5px dashed var(--ink-3)}
+
+/* tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--paper);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabbar-in{max-width:540px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);height:60px;align-items:center}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;font-weight:700;color:var(--ink-3);height:100%;justify-content:center;position:relative}
+.tab svg{width:24px;height:24px;position:relative}
+.tab[aria-current="page"]{color:var(--ink)}
+.tab[aria-current="page"] svg{color:var(--on)}
+.tab[aria-current="page"]::before{content:"";position:absolute;top:7px;left:calc(50% - 22px);width:44px;height:28px;border-radius:14px;background:var(--yellow)}
+.fab{justify-self:center;width:54px;height:54px;border-radius:50%;background:var(--yellow);color:var(--on);display:grid;place-items:center;font-size:21px;font-weight:900;transform:translateY(-10px);box-shadow:0 0 0 5px var(--paper),0 6px 18px rgba(240,190,40,.35)}
+.fab:active{transform:translateY(-10px) scale(.94)}
+
+/* sheet */
+#sheet{position:fixed;inset:0;z-index:40}
+#sheet[hidden]{display:none}
+.scrim{position:absolute;inset:0;background:rgba(20,22,28,.4);opacity:0;transition:opacity .22s}
+.panel{position:absolute;left:0;right:0;bottom:0;max-width:540px;margin:0 auto;max-height:calc(100% - env(safe-area-inset-top,0px) - 12px);background:var(--paper);border-radius:30px 30px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .28s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom,0px)}
+#sheet.open .scrim{opacity:1}
+#sheet.open .panel{transform:none}
+.grab{width:38px;height:5px;border-radius:3px;background:var(--line);margin:8px auto 0;flex:none}
+.sheet-head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:6px 16px;flex:none;gap:8px}
+.sheet-head h3{margin:0;font-size:17px;font-weight:800;text-align:center}
+.sheet-head .l{justify-self:start;color:var(--ink-2);font-weight:600;padding:8px 4px}
+.sheet-head .r{justify-self:end;color:var(--blue-ink);font-weight:700;padding:8px 4px}
+.sheet-head .r.red{color:var(--coral)}
+.sheet-body{isolation:isolate;overflow-y:auto;padding:4px 20px 18px;flex:1;-webkit-overflow-scrolling:touch}
+
+/* add sheet */
+.amt{position:relative;display:flex;flex-direction:column;align-items:flex-end;padding:10px 16px 10px;margin:4px 0 16px;min-height:88px;justify-content:flex-end;background:var(--yellow);color:var(--on);border-radius:26px}
+.amt.inc{background:var(--blue)}
+.amt-expr{font-family:var(--num);font-size:14px;font-weight:600;min-height:20px;opacity:.7}
+.amt-v{font-family:var(--num);font-size:42px;font-weight:900;line-height:1.1;letter-spacing:-.02em}
+.amt-v .yen{font-size:22px;margin-right:2px}
+.amt-v.zero{opacity:.35}
+.shake{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.note{width:100%;height:46px;border:0;border-radius:23px;padding-left:18px;background:var(--surface-2);padding:0 14px;font-size:16px}
+.note::placeholder{color:var(--ink-3)}
+.sug{display:flex;gap:6px;overflow-x:auto;margin:10px -20px 0;padding:0 20px;scrollbar-width:none}
+.sug::-webkit-scrollbar{display:none}
+.sug .chip{height:30px;font-size:13px}
+.field-l{font-size:13px;font-weight:800;color:var(--ink);margin:18px 0 8px}
+.date-pick{position:relative}
+.date-pick input{position:absolute;inset:0;opacity:0;width:100%;height:100%}
+.pay .seg{max-width:300px}
+.split{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:14px;font-weight:700}
+.split label{display:flex;align-items:center;gap:8px}
+.split input{width:110px;height:38px;border:0;border-radius:19px;background:var(--surface-2);padding:0 10px;text-align:right;font-family:var(--num);font-weight:700;font-size:17px}
+.split .rest{margin-left:auto;display:flex;align-items:center;gap:8px}
+.split .rest b{font-family:var(--num);font-size:17px}
+.cats{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:66px;gap:6px;overflow-x:auto;margin:0 -20px;padding:2px 20px 4px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px;border-radius:10px;font-size:12px;font-weight:600;color:var(--ink-2)}
+.cat .ic{width:46px;height:46px;font-size:19px;border-radius:50%}
+.cat[aria-pressed="true"]{color:var(--ink);font-weight:800}
+.cat[aria-pressed="true"] .ic{box-shadow:0 0 0 3px var(--paper),0 0 0 5.5px var(--ink)}
+.keypad{flex:none;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:10px 12px;background:var(--surface-2)}
+.key{height:50px;border-radius:25px;background:var(--surface);font-family:var(--num);font-size:23px;font-weight:800;display:grid;place-items:center}
+.key:active{background:var(--line)}
+.key.op{color:var(--blue-ink);font-size:26px}
+.key.save{background:var(--yellow);color:var(--on);font-family:var(--sans);font-size:17px;font-weight:800}
+.key svg{width:24px;height:24px}
+
+/* toast */
+#toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);opacity:0;z-index:60;background:var(--on);color:#fff;border-radius:22px;padding:12px 18px;font-size:14px;font-weight:700;display:flex;gap:16px;align-items:center;transition:.22s;pointer-events:none;max-width:calc(100% - 40px)}
+#toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#toast button{color:var(--yellow);flex:none;white-space:nowrap;font-weight:800}
+
+.search{display:flex;gap:8px;align-items:center}
+.found{display:flex;justify-content:space-between;margin:14px 0 4px;color:var(--ink-2);font-size:13px;font-weight:700}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap"><main id="view"></main></div>
+
+<nav class="tabbar" aria-label="主要分頁">
+  <div class="tabbar-in">
+    <button class="tab" data-tab="list" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="4.5" y="3.5" width="15" height="17" rx="1.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>明細</button>
+    <button class="tab" data-tab="fun">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M3.5 7a1.5 1.5 0 0 1 1.5-1.5h14A1.5 1.5 0 0 1 20.5 7v2.4a2.6 2.6 0 0 0 0 5.2V17a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 17v-2.4a2.6 2.6 0 0 0 0-5.2Z"/><path d="M15 7v1.5M15 11.3v1.4M15 15.5V17" stroke-linecap="round"/></svg>娛樂</button>
+    <button class="fab" data-act="add" aria-label="記一筆">記</button>
+    <button class="tab" data-tab="stats">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 20V12M12 20V5M19 20v-5M3 20.5h18"/></svg>統計</button>
+    <button class="tab" data-tab="settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>設定</button>
+  </div>
+</nav>
+
+<div id="sheet" hidden></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="importer" accept="application/json,.json" hidden>
+
+<script>
+(()=>{
+const SEED = {"records":[{"id":"r0","d":"2026-11-22","k":"BTS","n":"夾子","a":153,"t":"o","ev":"e1","p":"應援"},{"id":"r1","d":"2026-11-22","k":"BTS","n":"膠","a":164,"t":"o","ev":"e1","p":"應援"},{"id":"r2","d":"2026-11-22","k":"BTS","n":"包裝紙","a":70,"t":"o","ev":"e1","p":"應援"},{"id":"r3","d":"2026-11-22","k":"BTS","n":"高雄世運C13","a":5180,"t":"o","ev":"e1","p":"門票"},{"id":"r4","d":"2026-11-22","k":"BTS","n":"壓克力片（含買貨便140個）","a":948,"t":"o","ev":"e1","p":"應援"},{"id":"r5","d":"2026-11-22","k":"BTS","n":"車費（已付500）","a":900,"t":"o","ev":"e1","p":"交通","paid":500},{"id":"r6","d":"2026-11-21","k":"BTS","n":"提袋應援（43個）","a":2000,"t":"o","ev":"e1","p":"應援"},{"id":"r7","d":"2026-11-19","k":"BTS","n":"手工蝴蝶結（31個）","a":1003,"t":"o","ev":"e1","p":"應援"},{"id":"r8","d":"2026-11-19","k":"BTS","n":"台南住宿","a":6999,"t":"o","ev":"e1","p":"住宿"},{"id":"r9","d":"2026-11-19","k":"BTS","n":"高雄世運 E24","a":5180,"t":"o","ev":"e1","p":"門票"},{"id":"r10","d":"2026-10-31","k":"演唱會","n":"藤井風","a":5800,"t":"o","ev":"e2","p":"門票"},{"id":"r11","d":"2026-10-30","k":"演唱會","n":"住宿","a":3922,"t":"o","ev":"e2","p":"住宿"},{"id":"r12","d":"2026-09-30","k":"BTS","n":"鼻涕果","a":470,"t":"o"},{"id":"r13","d":"2026-09-20","k":"BTS","n":"swim 娃衣","a":260,"t":"o"},{"id":"r14","d":"2026-09-14","k":"小吃","n":"","a":109,"t":"o"},{"id":"r15","d":"2026-09-14","k":"小吃","n":"香港開心果巧克力薄脆","a":870,"t":"o"},{"id":"r16","d":"2026-09-12","k":"吉伊卡哇","n":"","a":438,"t":"o"},{"id":"r17","d":"2026-09-11","k":"小吃","n":"","a":131,"t":"o"},{"id":"r18","d":"2026-09-11","k":"交通","n":"","a":150,"t":"o"},{"id":"r19","d":"2026-09-11","k":"動漫","n":"莉莉禮物","a":200,"t":"o"},{"id":"r20","d":"2026-09-11","k":"動漫","n":"","a":220,"t":"o"},{"id":"r21","d":"2026-09-11","k":"小吃","n":"","a":35,"t":"o"},{"id":"r22","d":"2026-09-11","k":"動漫","n":"","a":200,"t":"o"},{"id":"r23","d":"2026-09-11","k":"夾娃娃","n":"","a":5,"t":"o"},{"id":"r24","d":"2026-09-11","k":"小吃","n":"","a":116,"t":"o"},{"id":"r25","d":"2026-09-11","k":"夾娃娃","n":"","a":70,"t":"o"},{"id":"r26","d":"2026-09-10","k":"美容","n":"綠油精","a":318,"t":"o"},{"id":"r27","d":"2026-09-10","k":"社交","n":"","a":180,"t":"o"},{"id":"r28","d":"2026-09-10","k":"小吃","n":"麻糬","a":170,"t":"o"},{"id":"r29","d":"2026-09-09","k":"手搖","n":"","a":70,"t":"o"},{"id":"r30","d":"2026-09-08","k":"小吃","n":"大餅","a":320,"t":"o"},{"id":"r31","d":"2026-09-08","k":"購物","n":"鞋墊和相框","a":98,"t":"o"},{"id":"r32","d":"2026-09-08","k":"小吃","n":"麵包","a":60,"t":"o"},{"id":"r33","d":"2026-09-08","k":"交通","n":"","a":210,"t":"o"},{"id":"r34","d":"2026-09-07","k":"小吃","n":"","a":114,"t":"o"},{"id":"r35","d":"2026-09-07","k":"BTS","n":"shooky","a":49,"t":"o"},{"id":"r36","d":"2026-09-04","k":"交通","n":"","a":90,"t":"o"},{"id":"r37","d":"2026-09-03","k":"手搖","n":"","a":165,"t":"o"},{"id":"r38","d":"2026-09-02","k":"吉伊卡哇","n":"","a":571,"t":"o"},{"id":"r39","d":"2026-09-02","k":"小吃","n":"","a":39,"t":"o"},{"id":"r40","d":"2026-09-02","k":"小吃","n":"豆花","a":220,"t":"o"},{"id":"r41","d":"2026-09-02","k":"扭蛋","n":"","a":100,"t":"o"},{"id":"r42","d":"2026-09-02","k":"社交","n":"文玲姐","a":310,"t":"o"},{"id":"r43","d":"2026-09-01","k":"動漫","n":"飛天小女警立牌","a":360,"t":"o"},{"id":"r44","d":"2026-09-01","k":"小吃","n":"雞肉飯","a":130,"t":"o"},{"id":"r45","d":"2026-08-31","k":"小吃","n":"炸物","a":250,"t":"o"},{"id":"r46","d":"2026-08-31","k":"交通","n":"","a":200,"t":"o"},{"id":"r47","d":"2026-08-31","k":"小吃","n":"糖果","a":156,"t":"o"},{"id":"r48","d":"2026-08-30","k":"小吃","n":"","a":140,"t":"o"},{"id":"r49","d":"2026-08-30","k":"小吃","n":"","a":58,"t":"o"},{"id":"r50","d":"2026-08-30","k":"演唱會","n":"髭男","a":2930,"t":"o","ev":"e4","p":"門票"},{"id":"r51","d":"2026-08-28","k":"小吃","n":"","a":210,"t":"o"},{"id":"r52","d":"2026-08-27","k":"手搖","n":"","a":85,"t":"o"},{"id":"r53","d":"2026-08-27","k":"小吃","n":"","a":95,"t":"o"},{"id":"r54","d":"2026-08-27","k":"禮品","n":"酷洛米","a":199,"t":"o"},{"id":"r55","d":"2026-08-25","k":"交通","n":"","a":259,"t":"o"},{"id":"r56","d":"2026-08-25","k":"小吃","n":"藏壽司","a":380,"t":"o"},{"id":"r57","d":"2026-08-25","k":"小吃","n":"酸菜魚","a":344,"t":"o"},{"id":"r58","d":"2026-08-25","k":"社交","n":"蛋糕","a":143,"t":"o"},{"id":"r59","d":"2026-08-24","k":"小吃","n":"雞心","a":55,"t":"o"},{"id":"r60","d":"2026-08-23","k":"小吃","n":"水","a":23,"t":"o"},{"id":"r61","d":"2026-08-23","k":"出遊玩樂","n":"鰻魚飯","a":660,"t":"o"},{"id":"r62","d":"2026-08-23","k":"出遊玩樂","n":"下午茶","a":400,"t":"o"},{"id":"r63","d":"2026-08-21","k":"健康","n":"","a":200,"t":"o"},{"id":"r64","d":"2026-08-21","k":"手搖","n":"","a":75,"t":"o"},{"id":"r65","d":"2026-08-21","k":"服裝","n":"NB鞋子","a":1799,"t":"o"},{"id":"r66","d":"2026-08-19","k":"電話費","n":"","a":499,"t":"o"},{"id":"r67","d":"2026-08-18","k":"小吃","n":"","a":74,"t":"o"},{"id":"r68","d":"2026-08-18","k":"夾娃娃","n":"","a":40,"t":"o"},{"id":"r69","d":"2026-08-18","k":"小吃","n":"","a":95,"t":"o"},{"id":"r70","d":"2026-08-17","k":"小吃","n":"草仔粿","a":45,"t":"o"},{"id":"r71","d":"2026-08-12","k":"旅行","n":"esim","a":349,"t":"o"},{"id":"r72","d":"2026-08-12","k":"旅行","n":"機票（含爸媽）","a":41814,"t":"o"},{"id":"r73","d":"2026-08-12","k":"手搖","n":"","a":155,"t":"o"},{"id":"r74","d":"2026-08-12","k":"旅行","n":"旅行費用（含換日幣一萬五）","a":22400,"t":"o"},{"id":"r75","d":"2026-08-11","k":"小吃","n":"","a":139,"t":"o"},{"id":"r76","d":"2026-08-10","k":"小吃","n":"","a":59,"t":"o"},{"id":"r77","d":"2026-08-10","k":"購物","n":"背帶","a":215,"t":"o"},{"id":"r78","d":"2026-08-10","k":"小吃","n":"","a":49,"t":"o"},{"id":"r79","d":"2026-08-08","k":"美容","n":"染髮","a":4720,"t":"o"},{"id":"r80","d":"2026-08-08","k":"家","n":"壽司郎","a":700,"t":"o"},{"id":"r81","d":"2026-08-07","k":"交通","n":"","a":500,"t":"o"},{"id":"r82","d":"2026-08-07","k":"出遊玩樂","n":"唱歌","a":675,"t":"o"},{"id":"r83","d":"2026-08-06","k":"購物","n":"爸爸鞋墊","a":49,"t":"o"},{"id":"r84","d":"2026-08-06","k":"小吃","n":"納豆","a":129,"t":"o"},{"id":"r85","d":"2026-08-06","k":"交通","n":"","a":116,"t":"o"},{"id":"r86","d":"2026-08-06","k":"夾娃娃","n":"","a":50,"t":"o"},{"id":"r87","d":"2026-08-06","k":"小吃","n":"","a":175,"t":"o"},{"id":"r88","d":"2026-08-06","k":"小吃","n":"","a":240,"t":"o"},{"id":"r89","d":"2026-08-05","k":"手搖","n":"","a":75,"t":"o"},{"id":"r90","d":"2026-08-05","k":"小吃","n":"阿洋","a":150,"t":"o"},{"id":"r91","d":"2026-08-05","k":"夾娃娃","n":"","a":20,"t":"o"},{"id":"r92","d":"2026-08-05","k":"小吃","n":"零食","a":75,"t":"o"},{"id":"r93","d":"2026-08-05","k":"手搖","n":"","a":77,"t":"o"},{"id":"r94","d":"2026-08-04","k":"小吃","n":"午餐","a":89,"t":"o"},{"id":"r95","d":"2026-08-04","k":"動漫","n":"欣梅爾抬頭娃","a":750,"t":"o"},{"id":"r96","d":"2026-08-04","k":"小吃","n":"","a":285,"t":"o"},{"id":"r97","d":"2026-08-03","k":"交通","n":"","a":145,"t":"o"},{"id":"r98","d":"2026-08-02","k":"小吃","n":"香腸","a":45,"t":"o"},{"id":"r99","d":"2026-08-02","k":"吉伊卡哇","n":"台北特展（娃、袋、便當袋、盲抽）","a":1580,"t":"o","ev":"e6","p":"周邊"},{"id":"r100","d":"2026-08-02","k":"交通","n":"","a":30,"t":"o"},{"id":"r101","d":"2026-08-02","k":"出遊玩樂","n":"吃飯","a":352,"t":"o"},{"id":"r102","d":"2026-08-02","k":"吉伊卡哇","n":"電影","a":284,"t":"o","ev":"e6","p":"其他"},{"id":"r103","d":"2026-08-02","k":"吉伊卡哇","n":"特展","a":528,"t":"o","ev":"e6","p":"門票"},{"id":"r104","d":"2026-08-02","k":"手搖","n":"","a":65,"t":"o"},{"id":"r105","d":"2026-08-02","k":"動漫","n":"哈利波特筆","a":299,"t":"o"},{"id":"r106","d":"2026-08-02","k":"動漫","n":"抽卡","a":250,"t":"o"},{"id":"r107","d":"2026-08-01","k":"公益","n":"","a":600,"t":"o"},{"id":"r108","d":"2026-07-31","k":"小吃","n":"冰","a":218,"t":"o"},{"id":"r109","d":"2026-07-31","k":"動漫","n":"欣梅爾popup","a":750,"t":"o"},{"id":"r110","d":"2026-07-31","k":"小吃","n":"","a":110,"t":"o"},{"id":"r111","d":"2026-07-31","k":"小吃","n":"芋頭蛋糕","a":150,"t":"o"},{"id":"r112","d":"2026-07-30","k":"服裝","n":"","a":590,"t":"o"},{"id":"r113","d":"2026-07-30","k":"小吃","n":"","a":100,"t":"o"},{"id":"r114","d":"2026-07-30","k":"小吃","n":"","a":140,"t":"o"},{"id":"r115","d":"2026-07-29","k":"小吃","n":"","a":626,"t":"o"},{"id":"r116","d":"2026-07-28","k":"小吃","n":"麵包","a":157,"t":"o"},{"id":"r117","d":"2026-07-28","k":"動漫","n":"家教抽卡","a":250,"t":"o"},{"id":"r118","d":"2026-07-28","k":"小吃","n":"","a":116,"t":"o"},{"id":"r119","d":"2026-07-27","k":"小吃","n":"","a":49,"t":"o"},{"id":"r120","d":"2026-07-27","k":"交通","n":"","a":215,"t":"o"},{"id":"r121","d":"2026-07-26","k":"小吃","n":"奶酪","a":208,"t":"o"},{"id":"r122","d":"2026-07-24","k":"小吃","n":"","a":135,"t":"o"},{"id":"r123","d":"2026-07-24","k":"服裝","n":"","a":490,"t":"o"},{"id":"r124","d":"2026-07-23","k":"美容","n":"","a":49,"t":"o"},{"id":"r125","d":"2026-07-23","k":"小吃","n":"","a":130,"t":"o"},{"id":"r126","d":"2026-07-23","k":"電話費","n":"","a":499,"t":"o"},{"id":"r127","d":"2026-07-22","k":"購物","n":"旅遊用品","a":303,"t":"o"},{"id":"r128","d":"2026-07-22","k":"服裝","n":"","a":246,"t":"o"},{"id":"r129","d":"2026-07-22","k":"美容","n":"屈臣氏","a":562,"t":"o"},{"id":"r130","d":"2026-07-21","k":"小吃","n":"","a":99,"t":"o"},{"id":"r131","d":"2026-07-21","k":"旅行","n":"保險","a":270,"t":"o"},{"id":"r132","d":"2026-07-20","k":"交通","n":"","a":230,"t":"o"},{"id":"r133","d":"2026-07-20","k":"小吃","n":"","a":25,"t":"o"},{"id":"r134","d":"2026-07-19","k":"小吃","n":"","a":248,"t":"o"},{"id":"r135","d":"2026-07-19","k":"BTS","n":"手燈包+炸彈吊飾","a":1795,"t":"o"},{"id":"r136","d":"2026-07-19","k":"小吃","n":"冰","a":130,"t":"o"},{"id":"r137","d":"2026-07-19","k":"小吃","n":"晚餐","a":160,"t":"o"},{"id":"r138","d":"2026-07-19","k":"購物","n":"紅包","a":152,"t":"o"},{"id":"r139","d":"2026-07-19","k":"出遊玩樂","n":"故宮門票 置物櫃 羽球","a":335,"t":"o"},{"id":"r140","d":"2026-07-17","k":"小吃","n":"","a":74,"t":"o"},{"id":"r141","d":"2026-07-17","k":"小吃","n":"豆花","a":220,"t":"o"},{"id":"r142","d":"2026-07-17","k":"購物","n":"鞋墊","a":49,"t":"o"},{"id":"r143","d":"2026-07-17","k":"扭蛋","n":"","a":100,"t":"o"},{"id":"r144","d":"2026-07-16","k":"交通","n":"","a":285,"t":"o"},{"id":"r145","d":"2026-07-14","k":"購物","n":"","a":295,"t":"o"},{"id":"r146","d":"2026-07-14","k":"社交","n":"蛋糕","a":199,"t":"o"},{"id":"r147","d":"2026-07-14","k":"辦公","n":"文件夾","a":67,"t":"o"},{"id":"r148","d":"2026-07-14","k":"小吃","n":"","a":125,"t":"o"},{"id":"r149","d":"2026-07-09","k":"小吃","n":"炸物","a":330,"t":"o"},{"id":"r150","d":"2026-07-09","k":"夾娃娃","n":"","a":40,"t":"o"},{"id":"r151","d":"2026-07-09","k":"小吃","n":"","a":47,"t":"o"},{"id":"r152","d":"2026-07-09","k":"小吃","n":"","a":150,"t":"o"},{"id":"r153","d":"2026-07-07","k":"購物","n":"夏日涼感物","a":258,"t":"o"},{"id":"r154","d":"2026-07-07","k":"禮品","n":"alo生日","a":3075,"t":"o"},{"id":"r155","d":"2026-07-07","k":"交通","n":"","a":178,"t":"o"},{"id":"r156","d":"2026-07-07","k":"小吃","n":"酸辣湯","a":40,"t":"o"},{"id":"r157","d":"2026-07-05","k":"小吃","n":"肉圓","a":150,"t":"o"},{"id":"r158","d":"2026-07-05","k":"動漫","n":"芙莉蓮扭蛋一組","a":441,"t":"o"},{"id":"r159","d":"2026-07-03","k":"小吃","n":"羊肉麵","a":160,"t":"o"},{"id":"r160","d":"2026-07-03","k":"小吃","n":"","a":278,"t":"o"},{"id":"r161","d":"2026-07-02","k":"小吃","n":"牛奶","a":92,"t":"o"},{"id":"r162","d":"2026-07-01","k":"健康","n":"瑜伽","a":1496,"t":"o"},{"id":"r163","d":"2026-07-01","k":"夾娃娃","n":"","a":40,"t":"o"},{"id":"r164","d":"2026-07-01","k":"小吃","n":"自己打飲料","a":128,"t":"o"},{"id":"r165","d":"2026-06-30","k":"夾娃娃","n":"","a":20,"t":"o"},{"id":"r166","d":"2026-06-30","k":"社交","n":"漢堡","a":340,"t":"o"},{"id":"r167","d":"2026-06-30","k":"小吃","n":"","a":90,"t":"o"},{"id":"r168","d":"2026-06-30","k":"購物","n":"襪子","a":60,"t":"o"},{"id":"r169","d":"2026-06-30","k":"社交","n":"","a":30,"t":"o"},{"id":"r170","d":"2026-06-29","k":"交通","n":"","a":300,"t":"o"},{"id":"r171","d":"2026-06-28","k":"BTS","n":"canva","a":30,"t":"o"},{"id":"r172","d":"2026-06-28","k":"小吃","n":"福伯","a":176,"t":"o"},{"id":"r173","d":"2026-06-28","k":"小吃","n":"酪梨","a":130,"t":"o"},{"id":"r174","d":"2026-06-26","k":"社交","n":"前同事聚餐","a":510,"t":"o"},{"id":"r175","d":"2026-06-26","k":"動漫","n":"欣努努娃450+巨人披風350","a":800,"t":"o"},{"id":"r176","d":"2026-06-25","k":"夾娃娃","n":"","a":100,"t":"o"},{"id":"r177","d":"2026-06-25","k":"小吃","n":"","a":139,"t":"o"},{"id":"r178","d":"2026-06-25","k":"夾娃娃","n":"","a":10,"t":"o"},{"id":"r179","d":"2026-06-25","k":"交通","n":"","a":200,"t":"o"},{"id":"r180","d":"2026-06-24","k":"夾娃娃","n":"","a":70,"t":"o"},{"id":"r181","d":"2026-06-24","k":"小吃","n":"","a":32,"t":"o"},{"id":"r182","d":"2026-06-24","k":"小吃","n":"甜甜圈","a":193,"t":"o"},{"id":"r183","d":"2026-06-24","k":"吉伊卡哇","n":"韓服小吉","a":600,"t":"o"},{"id":"r184","d":"2026-06-24","k":"小吃","n":"湯包","a":150,"t":"o"},{"id":"r185","d":"2026-06-23","k":"BTS","n":"護手霜","a":333,"t":"o"},{"id":"r186","d":"2026-06-23","k":"小吃","n":"","a":100,"t":"o"},{"id":"r187","d":"2026-06-23","k":"交通","n":"","a":110,"t":"o"},{"id":"r188","d":"2026-06-22","k":"BTS","n":"oreo","a":89,"t":"o"},{"id":"r189","d":"2026-06-22","k":"購物","n":"","a":49,"t":"o"},{"id":"r190","d":"2026-06-21","k":"手搖","n":"","a":70,"t":"o"},{"id":"r191","d":"2026-06-21","k":"手搖","n":"","a":50,"t":"o"},{"id":"r192","d":"2026-06-21","k":"小吃","n":"","a":45,"t":"o"},{"id":"r193","d":"2026-06-21","k":"小吃","n":"","a":135,"t":"o"},{"id":"r194","d":"2026-06-21","k":"小吃","n":"","a":70,"t":"o"},{"id":"r195","d":"2026-06-21","k":"小吃","n":"下午茶","a":395,"t":"o"},{"id":"r196","d":"2026-06-21","k":"交通","n":"","a":200,"t":"o"},{"id":"r197","d":"2026-06-18","k":"公益","n":"芥菜種會（關聖帝君）","a":600,"t":"o"},{"id":"r198","d":"2026-06-18","k":"公益","n":"雅文基金會（媽祖）","a":800,"t":"o"},{"id":"r199","d":"2026-06-18","k":"小吃","n":"晚餐","a":100,"t":"o"},{"id":"r200","d":"2026-06-18","k":"交通","n":"","a":200,"t":"o"},{"id":"r201","d":"2026-06-18","k":"手搖","n":"龍山寺還願","a":140,"t":"o"},{"id":"r202","d":"2026-06-18","k":"電話費","n":"","a":499,"t":"o"},{"id":"r203","d":"2026-06-17","k":"小吃","n":"豆花","a":165,"t":"o"},{"id":"r204","d":"2026-06-17","k":"BTS","n":"還願供品","a":175,"t":"o"},{"id":"r205","d":"2026-06-17","k":"小吃","n":"聖瑪莉","a":230,"t":"o"},{"id":"r206","d":"2026-06-16","k":"交通","n":"","a":133,"t":"o"},{"id":"r207","d":"2026-06-15","k":"小吃","n":"酷澎476-161","a":315,"t":"o"},{"id":"r208","d":"2026-06-15","k":"美容","n":"隱眼","a":580,"t":"o"},{"id":"r209","d":"2026-06-15","k":"小吃","n":"可樂果","a":87,"t":"o"},{"id":"r210","d":"2026-06-15","k":"吉伊卡哇","n":"","a":229,"t":"o"},{"id":"r211","d":"2026-06-15","k":"小吃","n":"","a":75,"t":"o"},{"id":"r212","d":"2026-06-14","k":"美容","n":"00韓國代購","a":1300,"t":"o"},{"id":"r213","d":"2026-06-14","k":"家","n":"吃飯錢","a":937,"t":"o"},{"id":"r214","d":"2026-06-13","k":"小吃","n":"湯包","a":44,"t":"o"},{"id":"r215","d":"2026-06-13","k":"小吃","n":"巧克力","a":40,"t":"o"},{"id":"r216","d":"2026-06-13","k":"購物","n":"雜物","a":203,"t":"o"},{"id":"r217","d":"2026-06-13","k":"服裝","n":"睡衣","a":286,"t":"o"},{"id":"r218","d":"2026-06-12","k":"小吃","n":"納豆","a":79,"t":"o"},{"id":"r219","d":"2026-06-12","k":"小吃","n":"杜力","a":200,"t":"o"},{"id":"r220","d":"2026-06-12","k":"交通","n":"","a":115,"t":"o"},{"id":"r221","d":"2026-06-12","k":"小吃","n":"","a":420,"t":"o"},{"id":"r222","d":"2026-06-11","k":"小吃","n":"","a":420,"t":"o"},{"id":"r223","d":"2026-06-09","k":"小吃","n":"","a":80,"t":"o"},{"id":"r224","d":"2026-06-09","k":"小吃","n":"","a":100,"t":"o"},{"id":"r225","d":"2026-06-09","k":"動漫","n":"家教明信片","a":238,"t":"o"},{"id":"r226","d":"2026-06-08","k":"手搖","n":"","a":65,"t":"o"},{"id":"r227","d":"2026-06-07","k":"小吃","n":"零食鍋巴餅","a":570,"t":"o"},{"id":"r228","d":"2026-06-04","k":"小吃","n":"聖瑪麗","a":220,"t":"o"},{"id":"r229","d":"2026-06-01","k":"小吃","n":"熱狗麵包","a":45,"t":"o"},{"id":"r230","d":"2026-06-01","k":"動漫","n":"六道骸","a":428,"t":"o"},{"id":"r231","d":"2026-06-01","k":"交通","n":"","a":200,"t":"o"},{"id":"r232","d":"2026-05-31","k":"購物","n":"葬送的芙莉蓮扭蛋","a":441,"t":"o"},{"id":"r233","d":"2026-05-30","k":"夾娃娃","n":"","a":20,"t":"o"},{"id":"r234","d":"2026-05-30","k":"社交","n":"川","a":620,"t":"o"},{"id":"r235","d":"2026-05-30","k":"出遊玩樂","n":"冰、網咖","a":500,"t":"o"},{"id":"r236","d":"2026-05-30","k":"夾娃娃","n":"","a":80,"t":"o"},{"id":"r237","d":"2026-05-29","k":"小吃","n":"情人果","a":200,"t":"o"},{"id":"r238","d":"2026-05-29","k":"出遊玩樂","n":"網咖","a":160,"t":"o"},{"id":"r239","d":"2026-05-29","k":"小吃","n":"燕麥奶","a":100,"t":"o"},{"id":"r240","d":"2026-05-28","k":"BTS","n":"","a":1470,"t":"o"},{"id":"r241","d":"2026-05-28","k":"小吃","n":"軟糖","a":59,"t":"o"},{"id":"r242","d":"2026-05-28","k":"小吃","n":"髒髒包","a":100,"t":"o"},{"id":"r243","d":"2026-05-28","k":"交通","n":"","a":171,"t":"o"},{"id":"r244","d":"2026-05-28","k":"小吃","n":"","a":80,"t":"o"},{"id":"r245","d":"2026-05-27","k":"小吃","n":"","a":70,"t":"o"},{"id":"r246","d":"2026-05-27","k":"小吃","n":"","a":35,"t":"o"},{"id":"r247","d":"2026-05-27","k":"小吃","n":"","a":150,"t":"o"},{"id":"r248","d":"2026-05-27","k":"吉伊卡哇","n":"","a":180,"t":"o"},{"id":"r249","d":"2026-05-26","k":"BTS","n":"拜月老","a":152,"t":"o"},{"id":"r250","d":"2026-05-26","k":"小吃","n":"酸菜牛肉麵","a":135,"t":"o"},{"id":"r251","d":"2026-05-25","k":"訂閱","n":"豆腐頭","a":399,"t":"o"},{"id":"r252","d":"2026-05-25","k":"交通","n":"","a":160,"t":"o"},{"id":"r253","d":"2026-05-25","k":"小吃","n":"杜拜巧克力","a":100,"t":"o"},{"id":"r254","d":"2026-05-23","k":"夾娃娃","n":"","a":40,"t":"o"},{"id":"r255","d":"2026-05-23","k":"小吃","n":"","a":150,"t":"o"},{"id":"r256","d":"2026-05-23","k":"出遊玩樂","n":"","a":666,"t":"o"},{"id":"r257","d":"2026-05-23","k":"出遊玩樂","n":"動物派對","a":419,"t":"o"},{"id":"r258","d":"2026-05-22","k":"小吃","n":"","a":64,"t":"o"},{"id":"r259","d":"2026-05-21","k":"小吃","n":"帥哥番茄果乾","a":330,"t":"o"},{"id":"r260","d":"2026-05-21","k":"小吃","n":"髒髒包","a":100,"t":"o"},{"id":"r261","d":"2026-05-21","k":"交通","n":"","a":187,"t":"o"},{"id":"r262","d":"2026-05-19","k":"吉伊卡哇","n":"","a":360,"t":"o"},{"id":"r263","d":"2026-05-19","k":"小吃","n":"蛋糕","a":150,"t":"o"},{"id":"r264","d":"2026-05-19","k":"手搖","n":"","a":90,"t":"o"},{"id":"r265","d":"2026-05-19","k":"小吃","n":"","a":90,"t":"o"},{"id":"r266","d":"2026-05-19","k":"小吃","n":"番茄軟糖","a":140,"t":"o"},{"id":"r267","d":"2026-05-18","k":"小吃","n":"烤年糕","a":241,"t":"o"},{"id":"r268","d":"2026-05-18","k":"小吃","n":"滷味","a":213,"t":"o"},{"id":"r269","d":"2026-05-18","k":"電話費","n":"","a":499,"t":"o"},{"id":"r270","d":"2026-05-16","k":"小吃","n":"","a":85,"t":"o"},{"id":"r271","d":"2026-05-16","k":"小吃","n":"","a":187,"t":"o"},{"id":"r272","d":"2026-05-16","k":"交通","n":"","a":200,"t":"o"},{"id":"r273","d":"2026-05-15","k":"小吃","n":"晚餐","a":294,"t":"o"},{"id":"r274","d":"2026-05-15","k":"夾娃娃","n":"","a":10,"t":"o"},{"id":"r275","d":"2026-05-15","k":"扭蛋","n":"","a":60,"t":"o"},{"id":"r276","d":"2026-05-13","k":"吉伊卡哇","n":"海苔吉衣服","a":1533,"t":"o"},{"id":"r277","d":"2026-05-12","k":"BTS","n":"可樂","a":196,"t":"o"},{"id":"r278","d":"2026-05-12","k":"手搖","n":"","a":85,"t":"o"},{"id":"r279","d":"2026-05-12","k":"小吃","n":"","a":80,"t":"o"},{"id":"r280","d":"2026-05-12","k":"夾娃娃","n":"","a":20,"t":"o"},{"id":"r281","d":"2026-05-12","k":"健康","n":"台灣人壽保險12494+5653","a":18147,"t":"o"},{"id":"r282","d":"2026-05-11","k":"小吃","n":"豆花","a":165,"t":"o"},{"id":"r283","d":"2026-05-09","k":"動漫","n":"日本代購1500-750","a":750,"t":"o"},{"id":"r284","d":"2026-05-08","k":"購物","n":"大創","a":148,"t":"o"},{"id":"r285","d":"2026-05-08","k":"交通","n":"","a":300,"t":"o"},{"id":"r286","d":"2026-05-08","k":"夾娃娃","n":"","a":40,"t":"o"},{"id":"r287","d":"2026-05-08","k":"小吃","n":"佳德","a":504,"t":"o"},{"id":"r288","d":"2026-05-08","k":"健康","n":"甲狀腺、乳房超音波","a":1600,"t":"o"},{"id":"r289","d":"2026-05-07","k":"夾娃娃","n":"","a":30,"t":"o"},{"id":"r290","d":"2026-05-07","k":"動漫","n":"飛天小女警","a":400,"t":"o"},{"id":"r291","d":"2026-05-07","k":"小吃","n":"","a":130,"t":"o"},{"id":"r292","d":"2026-05-07","k":"手搖","n":"","a":75,"t":"o"},{"id":"r293","d":"2026-05-06","k":"小吃","n":"冰","a":150,"t":"o"},{"id":"r294","d":"2026-05-06","k":"小吃","n":"地瓜球","a":50,"t":"o"},{"id":"r295","d":"2026-05-06","k":"小吃","n":"蚵仔煎","a":80,"t":"o"},{"id":"r296","d":"2026-05-05","k":"交通","n":"","a":200,"t":"o"},{"id":"r297","d":"2026-05-05","k":"小吃","n":"麵包","a":124,"t":"o"},{"id":"r298","d":"2026-05-05","k":"小吃","n":"香菜烤年糕","a":120,"t":"o"},{"id":"r299","d":"2026-05-05","k":"小吃","n":"午餐","a":149,"t":"o"},{"id":"r300","d":"2026-05-04","k":"小吃","n":"納豆","a":79,"t":"o"},{"id":"r301","d":"2026-05-04","k":"交通","n":"","a":50,"t":"o"},{"id":"r302","d":"2026-05-03","k":"手續費","n":"報稅","a":12635,"t":"o"},{"id":"r303","d":"2026-05-03","k":"健康","n":"","a":244,"t":"o"},{"id":"r304","d":"2026-04-30","k":"小吃","n":"亞尼克蛋糕儲值","a":1000,"t":"o"},{"id":"r305","d":"2026-04-29","k":"小吃","n":"","a":240,"t":"o"},{"id":"r306","d":"2026-04-28","k":"手搖","n":"","a":65,"t":"o"},{"id":"r307","d":"2026-04-28","k":"小吃","n":"","a":50,"t":"o"},{"id":"r308","d":"2026-04-28","k":"健康","n":"","a":250,"t":"o"},{"id":"r309","d":"2026-04-28","k":"交通","n":"","a":100,"t":"o"},{"id":"r310","d":"2026-04-28","k":"電話費","n":"","a":499,"t":"o"},{"id":"r311","d":"2026-04-27","k":"小吃","n":"麵包","a":83,"t":"o"},{"id":"r312","d":"2026-04-27","k":"夾娃娃","n":"","a":100,"t":"o"},{"id":"r313","d":"2026-04-27","k":"夾娃娃","n":"","a":90,"t":"o"},{"id":"r314","d":"2026-04-27","k":"保險","n":"富邦","a":10776,"t":"o"},{"id":"r315","d":"2026-04-26","k":"小吃","n":"冰品","a":446,"t":"o"},{"id":"r316","d":"2026-04-24","k":"小吃","n":"豆花","a":220,"t":"o"},{"id":"r317","d":"2026-04-24","k":"BTS","n":"高陽場踢","a":1728,"t":"o","ev":"e3","p":"周邊"},{"id":"r318","d":"2026-04-24","k":"BTS","n":"hope香水","a":333,"t":"o"},{"id":"r319","d":"2026-04-24","k":"交通","n":"","a":100,"t":"o"},{"id":"r320","d":"2026-04-23","k":"交通","n":"","a":100,"t":"o"},{"id":"r321","d":"2026-04-23","k":"小吃","n":"麵包","a":120,"t":"o"},{"id":"r322","d":"2026-04-23","k":"小吃","n":"麵包","a":166,"t":"o"},{"id":"r323","d":"2026-04-21","k":"手續費","n":"股票未中籤","a":70,"t":"o"},{"id":"r324","d":"2026-04-21","k":"手搖","n":"","a":218,"t":"o"},{"id":"r325","d":"2026-04-21","k":"小吃","n":"","a":80,"t":"o"},{"id":"r326","d":"2026-04-21","k":"辦公","n":"","a":40,"t":"o"},{"id":"r327","d":"2026-04-20","k":"小吃","n":"","a":200,"t":"o"},{"id":"r328","d":"2026-04-20","k":"健康","n":"瑜伽課","a":1496,"t":"o"},{"id":"r329","d":"2026-04-20","k":"交通","n":"","a":102,"t":"o"},{"id":"r330","d":"2026-04-19","k":"吉伊卡哇","n":"","a":416,"t":"o"},{"id":"r331","d":"2026-04-19","k":"辦公","n":"爆米花小卡","a":58,"t":"o"},{"id":"r332","d":"2026-04-19","k":"小吃","n":"大餅","a":140,"t":"o"},{"id":"r333","d":"2026-04-19","k":"小吃","n":"蒸餃","a":240,"t":"o"},{"id":"r334","d":"2026-04-19","k":"手搖","n":"","a":70,"t":"o"},{"id":"r335","d":"2026-04-19","k":"出遊玩樂","n":"港式","a":341,"t":"o"},{"id":"r336","d":"2026-04-19","k":"夾娃娃","n":"","a":100,"t":"o"},{"id":"r337","d":"2026-04-18","k":"小吃","n":"","a":138,"t":"o"},{"id":"r338","d":"2026-04-18","k":"電話費","n":"","a":499,"t":"o"},{"id":"r339","d":"2026-04-18","k":"BTS","n":"日場演唱會","a":1490,"t":"o","ev":"e3","p":"門票"},{"id":"r340","d":"2026-04-17","k":"交通","n":"","a":100,"t":"o"},{"id":"r341","d":"2026-04-16","k":"小吃","n":"","a":230,"t":"o"},{"id":"r342","d":"2026-04-16","k":"小吃","n":"","a":160,"t":"o"},{"id":"r343","d":"2026-04-13","k":"小吃","n":"涼麵","a":52,"t":"o"},{"id":"r344","d":"2026-04-12","k":"出遊玩樂","n":"ktv會員","a":200,"t":"o"},{"id":"r345","d":"2026-04-12","k":"出遊玩樂","n":"ktv","a":537,"t":"o"},{"id":"r346","d":"2026-04-12","k":"動漫","n":"我英吊飾","a":140,"t":"o"},{"id":"r347","d":"2026-04-12","k":"小吃","n":"下午茶","a":550,"t":"o"},{"id":"r348","d":"2026-04-12","k":"出遊玩樂","n":"密室逃脫","a":615,"t":"o"},{"id":"r349","d":"2026-04-11","k":"BTS","n":"高陽演唱會","a":1480,"t":"o","ev":"e3","p":"門票"},{"id":"r350","d":"2026-04-11","k":"交通","n":"","a":300,"t":"o"},{"id":"r351","d":"2026-04-11","k":"購物","n":"小卡套","a":64,"t":"o"},{"id":"r352","d":"2026-04-11","k":"小吃","n":"麻糬","a":160,"t":"o"},{"id":"r353","d":"2026-04-10","k":"小吃","n":"玉米脆片奶酪","a":208,"t":"o"},{"id":"r354","d":"2026-04-10","k":"小吃","n":"軟糖","a":29,"t":"o"},{"id":"r355","d":"2026-04-10","k":"小吃","n":"納豆","a":79,"t":"o"},{"id":"r356","d":"2026-04-09","k":"扭蛋","n":"帕恰狗","a":176,"t":"o"},{"id":"r357","d":"2026-04-09","k":"手搖","n":"","a":75,"t":"o"},{"id":"r358","d":"2026-04-08","k":"購物","n":"蟑螂藥","a":29,"t":"o"},{"id":"r359","d":"2026-04-08","k":"購物","n":"卡盒","a":49,"t":"o"},{"id":"r360","d":"2026-04-08","k":"動漫","n":"我英色紙","a":138,"t":"o"},{"id":"r361","d":"2026-04-07","k":"購物","n":"","a":30,"t":"o"},{"id":"r362","d":"2026-04-07","k":"小吃","n":"蛋糕","a":170,"t":"o"},{"id":"r363","d":"2026-04-07","k":"夾娃娃","n":"","a":70,"t":"o"},{"id":"r364","d":"2026-04-07","k":"夾娃娃","n":"","a":40,"t":"o"},{"id":"r365","d":"2026-04-07","k":"健康","n":"","a":200,"t":"o"},{"id":"r366","d":"2026-04-07","k":"BTS","n":"唐只（飯製周邊）","a":404,"t":"o"},{"id":"r367","d":"2026-04-06","k":"小吃","n":"餅乾","a":658,"t":"o"},{"id":"r368","d":"2026-04-05","k":"出遊玩樂","n":"插畫博覽會","a":250,"t":"o"},{"id":"r369","d":"2026-04-05","k":"購物","n":"卡套","a":150,"t":"o"},{"id":"r370","d":"2026-04-05","k":"購物","n":"卡套","a":180,"t":"o"},{"id":"r371","d":"2026-04-05","k":"小吃","n":"下午茶","a":260,"t":"o"},{"id":"r372","d":"2026-04-05","k":"健康","n":"運動","a":250,"t":"o"},{"id":"r373","d":"2026-04-04","k":"演唱會","n":"tuki演唱會","a":3310,"t":"o","ev":"e5","p":"門票"},{"id":"r374","d":"2026-04-02","k":"小吃","n":"甜甜圈","a":251,"t":"o"},{"id":"r375","d":"2026-03-31","k":"手搖","n":"","a":60,"t":"o"},{"id":"r376","d":"2026-03-28","k":"健康","n":"場地費500/5","a":100,"t":"o"},{"id":"r377","d":"2026-03-28","k":"動漫","n":"櫻蘭卡套","a":350,"t":"o"},{"id":"r378","d":"2026-03-28","k":"小吃","n":"捲捲村","a":130,"t":"o"},{"id":"r379","d":"2026-03-28","k":"小吃","n":"鳥蛋","a":40,"t":"o"},{"id":"r380","d":"2026-03-28","k":"小吃","n":"冰淇淋","a":180,"t":"o"},{"id":"r381","d":"2026-03-28","k":"小吃","n":"麵包","a":180,"t":"o"},{"id":"r382","d":"2026-03-28","k":"小吃","n":"藥燉排骨","a":110,"t":"o"},{"id":"r383","d":"2026-03-28","k":"交通","n":"","a":500,"t":"o"},{"id":"r384","d":"2026-03-27","k":"小吃","n":"麵包","a":160,"t":"o"},{"id":"r385","d":"2026-03-27","k":"健康","n":"勝利羽球","a":460,"t":"o"},{"id":"r386","d":"2026-03-25","k":"夾娃娃","n":"","a":60,"t":"o"},{"id":"r387","d":"2026-03-25","k":"交通","n":"","a":160,"t":"o"},{"id":"r388","d":"2026-03-24","k":"社交","n":"肉桂捲","a":165,"t":"o"},{"id":"r389","d":"2026-03-24","k":"小吃","n":"","a":120,"t":"o"},{"id":"r390","d":"2026-03-23","k":"禮品","n":"莉莉扭蛋","a":20,"t":"o"},{"id":"r391","d":"2026-03-23","k":"交通","n":"","a":15,"t":"o"},{"id":"r392","d":"2026-03-23","k":"手搖","n":"","a":65,"t":"o"},{"id":"r393","d":"2026-03-22","k":"交通","n":"計程車","a":160,"t":"o"},{"id":"r394","d":"2026-03-22","k":"手搖","n":"","a":75,"t":"o"},{"id":"r395","d":"2026-03-22","k":"BTS","n":"電池","a":99,"t":"o"},{"id":"r396","d":"2026-03-22","k":"購物","n":"三麗鷗髮夾","a":291,"t":"o"},{"id":"r397","d":"2026-03-22","k":"小吃","n":"牛肉麵","a":300,"t":"o"},{"id":"r398","d":"2026-03-22","k":"小吃","n":"鳥蛋","a":20,"t":"o"},{"id":"r399","d":"2026-03-22","k":"夾娃娃","n":"","a":50,"t":"o"},{"id":"r400","d":"2026-03-22","k":"小吃","n":"大餅","a":280,"t":"o"},{"id":"r401","d":"2026-03-22","k":"動漫","n":"獵人周邊","a":758,"t":"o"},{"id":"r402","d":"2026-03-22","k":"交通","n":"","a":150,"t":"o"},{"id":"r403","d":"2026-03-21","k":"BTS","n":"netflex","a":290,"t":"o"},{"id":"r404","d":"2026-03-21","k":"電話費","n":"","a":499,"t":"o"},{"id":"r405","d":"2026-03-20","k":"小吃","n":"提拉米蘇、納豆","a":412,"t":"o"},{"id":"r406","d":"2026-03-20","k":"美容","n":"口罩、化妝棉","a":503,"t":"o"},{"id":"r407","d":"2026-03-20","k":"社交","n":"Andrew歡送","a":500,"t":"o"},{"id":"r408","d":"2026-03-20","k":"BTS","n":"專輯1080+205+60","a":1345,"t":"o"},{"id":"r409","d":"2026-03-20","k":"健康","n":"衛生棉、牙線","a":454,"t":"o"},{"id":"r410","d":"2026-03-19","k":"買賣","n":"","a":270,"t":"i"},{"id":"r411","d":"2026-03-17","k":"小吃","n":"炸物","a":425,"t":"o"},{"id":"r412","d":"2026-03-17","k":"小吃","n":"","a":149,"t":"o"},{"id":"r413","d":"2026-03-16","k":"購物","n":"蝦皮","a":242,"t":"o"},{"id":"r414","d":"2026-03-13","k":"交通","n":"","a":219,"t":"o"},{"id":"r415","d":"2026-03-13","k":"服裝","n":"","a":1129,"t":"o"},{"id":"r416","d":"2026-03-13","k":"社交","n":"開心果馬卡龍","a":170,"t":"o"},{"id":"r417","d":"2026-03-13","k":"小吃","n":"","a":35,"t":"o"},{"id":"r418","d":"2026-03-12","k":"小吃","n":"滷味","a":183,"t":"o"},{"id":"r419","d":"2026-03-12","k":"小吃","n":"草莓","a":200,"t":"o"},{"id":"r420","d":"2026-03-12","k":"禮品","n":"師妹","a":550,"t":"o"},{"id":"r421","d":"2026-03-12","k":"社交","n":"蛋糕","a":188,"t":"o"},{"id":"r422","d":"2026-03-12","k":"小吃","n":"","a":130,"t":"o"},{"id":"r423","d":"2026-03-11","k":"小吃","n":"杜拜巧克力","a":300,"t":"o"},{"id":"r424","d":"2026-03-11","k":"交通","n":"","a":200,"t":"o"},{"id":"r425","d":"2026-03-11","k":"禮品","n":"手工藝","a":96,"t":"o"},{"id":"r426","d":"2026-03-11","k":"禮品","n":"","a":15,"t":"o"},{"id":"r427","d":"2026-03-10","k":"小吃","n":"","a":150,"t":"o"},{"id":"r428","d":"2026-03-10","k":"手搖","n":"","a":70,"t":"o"},{"id":"r429","d":"2026-03-09","k":"購物","n":"哩哩摳摳手作","a":222,"t":"o"},{"id":"r430","d":"2026-03-09","k":"小吃","n":"","a":100,"t":"o"},{"id":"r431","d":"2026-03-06","k":"小吃","n":"","a":150,"t":"o"},{"id":"r432","d":"2026-03-06","k":"交通","n":"","a":200,"t":"o"},{"id":"r433","d":"2026-03-05","k":"動漫","n":"小櫻小卡","a":150,"t":"o"},{"id":"r434","d":"2026-03-05","k":"動漫","n":"小櫻明信片","a":199,"t":"o"},{"id":"r435","d":"2026-03-05","k":"小吃","n":"雞金","a":240,"t":"o"},{"id":"r436","d":"2026-03-05","k":"手搖","n":"","a":90,"t":"o"},{"id":"r437","d":"2026-03-05","k":"訂閱","n":"hami","a":567,"t":"o"},{"id":"r438","d":"2026-03-04","k":"小吃","n":"麵包","a":145,"t":"o"},{"id":"r439","d":"2026-03-04","k":"彩票","n":"line tv","a":168,"t":"i"},{"id":"r440","d":"2026-03-03","k":"禮品","n":"一番賞抽籤紙","a":20,"t":"o"},{"id":"r441","d":"2026-03-03","k":"小吃","n":"","a":90,"t":"o"},{"id":"r442","d":"2026-03-03","k":"手搖","n":"","a":54,"t":"o"},{"id":"r443","d":"2026-03-02","k":"小吃","n":"優洛乳","a":75,"t":"o"},{"id":"r444","d":"2026-03-02","k":"小吃","n":"","a":80,"t":"o"},{"id":"r445","d":"2026-03-02","k":"購物","n":"莉莉日本採購","a":2000,"t":"o"},{"id":"r446","d":"2026-03-01","k":"公益","n":"台灣婦女展業協會228胸章","a":200,"t":"o"},{"id":"r447","d":"2026-02-26","k":"交通","n":"","a":200,"t":"o"},{"id":"r448","d":"2026-02-26","k":"出遊玩樂","n":"志訓電影","a":236,"t":"o"},{"id":"r449","d":"2026-02-26","k":"小吃","n":"美食街","a":298,"t":"o"},{"id":"r450","d":"2026-02-26","k":"小吃","n":"","a":90,"t":"o"},{"id":"r451","d":"2026-02-26","k":"健康","n":"瑜伽課","a":1232,"t":"o"},{"id":"r452","d":"2026-02-25","k":"交通","n":"","a":65,"t":"o"},{"id":"r453","d":"2026-02-25","k":"社交","n":"欣葉春酒","a":500,"t":"o"},{"id":"r454","d":"2026-02-25","k":"夾娃娃","n":"","a":10,"t":"o"},{"id":"r455","d":"2026-02-24","k":"夾娃娃","n":"","a":30,"t":"o"},{"id":"r456","d":"2026-02-24","k":"小吃","n":"","a":80,"t":"o"},{"id":"r457","d":"2026-02-23","k":"手搖","n":"","a":64,"t":"o"},{"id":"r458","d":"2026-02-23","k":"小吃","n":"","a":35,"t":"o"},{"id":"r459","d":"2026-02-22","k":"電話費","n":"","a":499,"t":"o"},{"id":"r460","d":"2026-02-21","k":"家","n":"石鍋拌飯","a":305,"t":"o"},{"id":"r461","d":"2026-02-21","k":"交通","n":"","a":200,"t":"o"},{"id":"r462","d":"2026-02-17","k":"公益","n":"樂扶基金會偏鄉孩童早餐","a":900,"t":"o"},{"id":"r463","d":"2026-02-17","k":"公益","n":"小草書屋","a":600,"t":"o"},{"id":"r464","d":"2026-02-16","k":"小吃","n":"酷澎","a":546,"t":"o"},{"id":"r465","d":"2026-02-16","k":"退款","n":"阿北退款紅包","a":12600,"t":"i"},{"id":"r466","d":"2026-02-16","k":"家","n":"紅包","a":8900,"t":"o"},{"id":"r467","d":"2026-02-16","k":"服裝","n":"23.65鞋子","a":718,"t":"o"},{"id":"r468","d":"2026-02-13","k":"小吃","n":"冰淇淋","a":150,"t":"o"},{"id":"r469","d":"2026-02-13","k":"動漫","n":"蠟筆小新盲夾","a":98,"t":"o"},{"id":"r470","d":"2026-02-13","k":"家","n":"超市","a":284,"t":"o"},{"id":"r471","d":"2026-02-13","k":"動漫","n":"獵人盲卡","a":200,"t":"o"},{"id":"r472","d":"2026-02-13","k":"小吃","n":"曲奇餅乾","a":305,"t":"o"},{"id":"r473","d":"2026-02-13","k":"手搖","n":"大茗","a":64,"t":"o"},{"id":"r474","d":"2026-02-13","k":"小吃","n":"水餃","a":100,"t":"o"},{"id":"r475","d":"2026-02-13","k":"動漫","n":"去見媽咪的路上娃娃","a":522,"t":"o"},{"id":"r476","d":"2026-02-13","k":"公益","n":"威力彩","a":100,"t":"o"},{"id":"r477","d":"2026-02-12","k":"小吃","n":"曲奇餅","a":300,"t":"o"},{"id":"r478","d":"2026-02-12","k":"小吃","n":"","a":150,"t":"o"},{"id":"r479","d":"2026-02-11","k":"家","n":"炸雞","a":345,"t":"o"},{"id":"r480","d":"2026-02-11","k":"夾娃娃","n":"","a":10,"t":"o"},{"id":"r481","d":"2026-02-11","k":"發票","n":"","a":498,"t":"i"},{"id":"r482","d":"2026-02-11","k":"手搖","n":"季緣","a":81,"t":"o"},{"id":"r483","d":"2026-02-11","k":"小吃","n":"酸辣湯","a":35,"t":"o"},{"id":"r484","d":"2026-02-11","k":"交通","n":"","a":200,"t":"o"},{"id":"r485","d":"2026-02-10","k":"小吃","n":"泡菜蔬菜麵","a":90,"t":"o"},{"id":"r486","d":"2026-02-09","k":"退款","n":"徽章賣出","a":180,"t":"i"},{"id":"r487","d":"2026-02-09","k":"吉伊卡哇","n":"圍兜兜","a":189,"t":"o"},{"id":"r488","d":"2026-02-09","k":"小吃","n":"蛋","a":10,"t":"o"},{"id":"r489","d":"2026-02-09","k":"吉伊卡哇","n":"筆","a":140,"t":"o"},{"id":"r490","d":"2026-02-09","k":"吉伊卡哇","n":"徽章","a":180,"t":"o"},{"id":"r491","d":"2026-02-09","k":"吉伊卡哇","n":"怕洽狗","a":460,"t":"o"},{"id":"r492","d":"2026-02-09","k":"交通","n":"","a":150,"t":"o"},{"id":"r493","d":"2026-02-09","k":"BTS","n":"手燈","a":1350,"t":"o"},{"id":"r494","d":"2026-02-08","k":"家","n":"韓國轉帳秋","a":1345,"t":"o"},{"id":"r495","d":"2026-02-07","k":"出遊玩樂","n":"動漫展","a":120,"t":"o"},{"id":"r496","d":"2026-02-07","k":"出遊玩樂","n":"番茄太陽拉麵","a":517,"t":"o"},{"id":"r497","d":"2026-02-07","k":"扭蛋","n":"","a":30,"t":"o"},{"id":"r498","d":"2026-02-07","k":"扭蛋","n":"","a":30,"t":"o"},{"id":"r499","d":"2026-02-07","k":"購物","n":"塑膠卡套","a":30,"t":"o"},{"id":"r500","d":"2026-02-07","k":"動漫","n":"芙莉蓮貼紙","a":239,"t":"o"},{"id":"r501","d":"2026-02-07","k":"吉伊卡哇","n":"肥包","a":199,"t":"o"},{"id":"r502","d":"2026-02-07","k":"動漫","n":"芙莉蓮小卡","a":200,"t":"o"},{"id":"r503","d":"2026-02-07","k":"動漫","n":"我英小卡","a":150,"t":"o"},{"id":"r504","d":"2026-02-07","k":"動漫","n":"我英壓克力吊飾","a":220,"t":"o"},{"id":"r505","d":"2026-02-07","k":"動漫","n":"我英卡套","a":150,"t":"o"},{"id":"r506","d":"2026-02-07","k":"小吃","n":"水、巧克力、衛生紙","a":70,"t":"o"},{"id":"r507","d":"2026-02-07","k":"小吃","n":"聖娜","a":217,"t":"o"},{"id":"r508","d":"2026-02-06","k":"夾娃娃","n":"","a":20,"t":"o"},{"id":"r509","d":"2026-02-06","k":"動漫","n":"進擊的巨人小卡","a":200,"t":"o"},{"id":"r510","d":"2026-02-05","k":"動漫","n":"芙莉蓮泡泡瑪特","a":330,"t":"o"},{"id":"r511","d":"2026-02-05","k":"出遊玩樂","n":"尾牙抽獎賭博","a":100,"t":"o"},{"id":"r512","d":"2026-02-05","k":"交通","n":"","a":200,"t":"o"},{"id":"r513","d":"2026-02-04","k":"動漫","n":"芙莉蓮大創立牌*3","a":434,"t":"o"},{"id":"r514","d":"2026-02-04","k":"吉伊卡哇","n":"吉伊卡哇紅包袋","a":25,"t":"o"},{"id":"r515","d":"2026-02-04","k":"手續費","n":"","a":5,"t":"o"},{"id":"r516","d":"2026-02-04","k":"手搖","n":"","a":65,"t":"o"},{"id":"r517","d":"2026-02-04","k":"美容","n":"康是美（遮瑕、卸妝）","a":531,"t":"o"},{"id":"r518","d":"2026-02-03","k":"小吃","n":"炸物","a":200,"t":"o"},{"id":"r519","d":"2026-02-03","k":"小吃","n":"早餐店","a":110,"t":"o"},{"id":"r520","d":"2026-02-02","k":"小吃","n":"全家仙草茶","a":56,"t":"o"},{"id":"r521","d":"2026-02-02","k":"小吃","n":"滷味","a":80,"t":"o"},{"id":"r522","d":"2026-02-02","k":"小吃","n":"牛乳片","a":363,"t":"o"},{"id":"r523","d":"2026-02-02","k":"動漫","n":"我英j賞壓克力牌*3","a":250,"t":"o"},{"id":"r524","d":"2026-01-31","k":"小吃","n":"草仔粿","a":500,"t":"o"},{"id":"r525","d":"2026-01-31","k":"社交","n":"唱歌","a":769,"t":"o"},{"id":"r526","d":"2026-01-31","k":"社交","n":"芋圓","a":60,"t":"o"},{"id":"r527","d":"2026-01-31","k":"社交","n":"義大利麵","a":230,"t":"o"},{"id":"r528","d":"2026-01-31","k":"交通","n":"","a":200,"t":"o"},{"id":"r529","d":"2026-01-31","k":"小吃","n":"水","a":20,"t":"o"},{"id":"r530","d":"2026-01-31","k":"夾娃娃","n":"","a":20,"t":"o"},{"id":"r531","d":"2026-01-30","k":"夾娃娃","n":"","a":150,"t":"o"},{"id":"r532","d":"2026-01-30","k":"購物","n":"芙莉蓮明信片書","a":346,"t":"o"},{"id":"r533","d":"2026-01-29","k":"夾娃娃","n":"","a":40,"t":"o"},{"id":"r534","d":"2026-01-29","k":"購物","n":"我英盲抽","a":325,"t":"o"},{"id":"r535","d":"2026-01-29","k":"交通","n":"","a":200,"t":"o"},{"id":"r536","d":"2026-01-27","k":"小吃","n":"豬腳","a":218,"t":"o"},{"id":"r537","d":"2026-01-27","k":"服裝","n":"","a":140,"t":"o"},{"id":"r538","d":"2026-01-27","k":"小吃","n":"燙燙義大利麵","a":150,"t":"o"},{"id":"r539","d":"2026-01-26","k":"家","n":"台南費用","a":7760,"t":"o"},{"id":"r540","d":"2026-01-26","k":"購物","n":"泡泡瑪特","a":330,"t":"o"},{"id":"r541","d":"2026-01-26","k":"購物","n":"盒子","a":49,"t":"o"},{"id":"r542","d":"2026-01-26","k":"交通","n":"","a":107,"t":"o"},{"id":"r543","d":"2026-01-26","k":"小吃","n":"","a":98,"t":"o"},{"id":"r544","d":"2026-01-26","k":"手搖","n":"","a":70,"t":"o"},{"id":"r545","d":"2026-01-23","k":"夾娃娃","n":"","a":70,"t":"o"},{"id":"r546","d":"2026-01-23","k":"小吃","n":"","a":260,"t":"o"},{"id":"r547","d":"2026-01-23","k":"BTS","n":"公仔","a":298,"t":"o"},{"id":"r548","d":"2026-01-23","k":"手搖","n":"","a":70,"t":"o"},{"id":"r549","d":"2026-01-23","k":"小吃","n":"","a":90,"t":"o"},{"id":"r550","d":"2026-01-23","k":"家","n":"零食","a":350,"t":"o"},{"id":"r551","d":"2026-01-22","k":"小吃","n":"肉桂捲","a":165,"t":"o"},{"id":"r552","d":"2026-01-21","k":"公益","n":"","a":1200,"t":"o"},{"id":"r553","d":"2026-01-20","k":"小吃","n":"燒仙草","a":220,"t":"o"},{"id":"r554","d":"2026-01-20","k":"交通","n":"","a":200,"t":"o"},{"id":"r555","d":"2026-01-20","k":"夾娃娃","n":"","a":60,"t":"o"},{"id":"r556","d":"2026-01-20","k":"夾娃娃","n":"","a":40,"t":"o"},{"id":"r557","d":"2026-01-19","k":"購物","n":"綠谷寶寶娃","a":368,"t":"o"},{"id":"r558","d":"2026-01-19","k":"小吃","n":"","a":310,"t":"o"},{"id":"r559","d":"2026-01-19","k":"小吃","n":"榴蓮樂事","a":79,"t":"o"},{"id":"r560","d":"2026-01-19","k":"吉伊卡哇","n":"小甲蟲","a":231,"t":"o"},{"id":"r561","d":"2026-01-18","k":"手搖","n":"","a":65,"t":"o"},{"id":"r562","d":"2026-01-18","k":"購物","n":"葬送的芙莉蓮","a":100,"t":"o"},{"id":"r563","d":"2026-01-18","k":"出遊玩樂","n":"冰","a":52,"t":"o"},{"id":"r564","d":"2026-01-18","k":"出遊玩樂","n":"地瓜球","a":50,"t":"o"},{"id":"r565","d":"2026-01-18","k":"出遊玩樂","n":"藥燉排骨","a":110,"t":"o"},{"id":"r566","d":"2026-01-18","k":"出遊玩樂","n":"葬送的芙莉蓮展覽","a":80,"t":"o"},{"id":"r567","d":"2026-01-18","k":"夾娃娃","n":"","a":30,"t":"o"},{"id":"r568","d":"2026-01-18","k":"電話費","n":"","a":499,"t":"o"},{"id":"r569","d":"2026-01-16","k":"交通","n":"","a":200,"t":"o"},{"id":"r570","d":"2026-01-16","k":"購物","n":"暖暖包","a":57,"t":"o"},{"id":"r571","d":"2026-01-16","k":"小吃","n":"玉米濃湯","a":40,"t":"o"},{"id":"r572","d":"2026-01-15","k":"社交","n":"飲料","a":67,"t":"o"},{"id":"r573","d":"2026-01-15","k":"手搖","n":"","a":49,"t":"o"},{"id":"r574","d":"2026-01-15","k":"小吃","n":"餅乾","a":14,"t":"o"},{"id":"r575","d":"2026-01-13","k":"小吃","n":"","a":80,"t":"o"},{"id":"r576","d":"2026-01-13","k":"社交","n":"請飲料","a":60,"t":"o"},{"id":"r577","d":"2026-01-13","k":"BTS","n":"會員","a":650,"t":"o"},{"id":"r578","d":"2026-01-12","k":"吉伊卡哇","n":"正月","a":269,"t":"o"},{"id":"r579","d":"2026-01-12","k":"小吃","n":"布丁","a":32,"t":"o"},{"id":"r580","d":"2026-01-12","k":"小吃","n":"","a":59,"t":"o"},{"id":"r581","d":"2026-01-12","k":"交通","n":"","a":145,"t":"o"},{"id":"r582","d":"2026-01-12","k":"吉伊卡哇","n":"達摩","a":948,"t":"o"},{"id":"r583","d":"2026-01-11","k":"旅行","n":"十鼓門票","a":976,"t":"o"},{"id":"r584","d":"2026-01-11","k":"旅行","n":"伴手禮","a":437,"t":"o"},{"id":"r585","d":"2026-01-11","k":"旅行","n":"置物櫃","a":30,"t":"o"},{"id":"r586","d":"2026-01-10","k":"旅行","n":"鴨肉羹","a":100,"t":"o"},{"id":"r587","d":"2026-01-10","k":"旅行","n":"榴槤脆餅","a":220,"t":"o"},{"id":"r588","d":"2026-01-10","k":"旅行","n":"牛排","a":420,"t":"o"},{"id":"r589","d":"2026-01-10","k":"旅行","n":"春川煎餅","a":400,"t":"o"},{"id":"r590","d":"2026-01-10","k":"旅行","n":"白糖粿","a":80,"t":"o"},{"id":"r591","d":"2026-01-09","k":"小吃","n":"冰","a":108,"t":"o"},{"id":"r592","d":"2026-01-09","k":"小吃","n":"","a":130,"t":"o"},{"id":"r593","d":"2026-01-09","k":"夾娃娃","n":"","a":100,"t":"o"},{"id":"r594","d":"2026-01-09","k":"社交","n":"請飲料","a":810,"t":"o"},{"id":"r595","d":"2026-01-08","k":"購物","n":"大誌","a":150,"t":"o"},{"id":"r596","d":"2026-01-08","k":"小吃","n":"粥","a":90,"t":"o"},{"id":"r597","d":"2026-01-07","k":"小吃","n":"燒仙草","a":165,"t":"o"},{"id":"r598","d":"2026-01-07","k":"小吃","n":"烤年糕","a":192,"t":"o"},{"id":"r599","d":"2026-01-07","k":"交通","n":"","a":200,"t":"o"},{"id":"r600","d":"2026-01-07","k":"吉伊卡哇","n":"垂耳加公仔","a":680,"t":"o"},{"id":"r601","d":"2026-01-07","k":"小吃","n":"年糕","a":60,"t":"o"},{"id":"r602","d":"2026-01-07","k":"手搖","n":"","a":80,"t":"o"},{"id":"r603","d":"2026-01-06","k":"小吃","n":"","a":134,"t":"o"},{"id":"r604","d":"2026-01-06","k":"夾娃娃","n":"","a":20,"t":"o"},{"id":"r605","d":"2026-01-05","k":"小吃","n":"","a":90,"t":"o"},{"id":"r606","d":"2026-01-05","k":"手搖","n":"","a":50,"t":"o"},{"id":"r607","d":"2026-01-03","k":"社交","n":"下午茶","a":470,"t":"o"},{"id":"r608","d":"2026-01-03","k":"社交","n":"早午餐","a":470,"t":"o"},{"id":"r609","d":"2026-01-03","k":"購物","n":"進巨蘑菇娃","a":1273,"t":"o"},{"id":"r610","d":"2026-01-03","k":"交通","n":"","a":200,"t":"o"},{"id":"r611","d":"2026-01-02","k":"小吃","n":"烤年糕","a":176,"t":"o"},{"id":"r612","d":"2026-01-02","k":"小吃","n":"滷味","a":284,"t":"o"},{"id":"r613","d":"2026-01-02","k":"手搖","n":"得正","a":50,"t":"o"},{"id":"r614","d":"2026-01-02","k":"小吃","n":"蔬菜麵","a":90,"t":"o"},{"id":"r615","d":"2026-01-01","k":"訂閱","n":"bomtoon","a":489,"t":"o"},{"id":"r616","d":"2026-01-01","k":"夾娃娃","n":"","a":30,"t":"o"},{"id":"r617","d":"2026-01-01","k":"小吃","n":"麵包","a":35,"t":"o"},{"id":"r618","d":"2026-01-01","k":"小吃","n":"牛奶棒","a":100,"t":"o"},{"id":"r619","d":"2026-01-01","k":"家","n":"","a":90000,"t":"o"},{"id":"r620","d":"2026-01-01","k":"訂閱","n":"kktv","a":1111,"t":"o"}],"events":[{"id":"e1","name":"BTS 高雄世運","s":"2026-11-19","e":"2026-11-22","hue":262},{"id":"e2","name":"藤井風","s":"2026-10-30","e":"2026-10-31","hue":200},{"id":"e6","name":"吉伊卡哇台北特展","s":"2026-08-02","e":"2026-08-02","hue":340},{"id":"e4","name":"髭男 Official髭男dism","s":"2026-08-30","e":"2026-08-30","hue":20},{"id":"e3","name":"BTS 高陽","s":"2026-04-11","e":"2026-04-24","hue":280},{"id":"e5","name":"tuki. 演唱會","s":"2026-04-04","e":"2026-04-04","hue":150}]};
+const KEY = 'xiaopiao.v1';
+const DEFAULT_FUN = ['BTS','演唱會','吉伊卡哇','動漫','扭蛋','夾娃娃','訂閱','出遊玩樂'];
+/* one-character marks, like a family crest: [glyph, hue] */
+const CATS = {
+  '小吃':['食',28],'手搖':['茶',95],'交通':['行',205],'購物':['買',330],'社交':['友',45],'健康':['健',150],
+  '旅行':['旅',190],'家':['家',15],'電話費':['話',220],'公益':['善',110],'服裝':['衣',240],'美容':['美',350],
+  '禮品':['禮',0],'手續費':['費',60],'辦公':['文',210],'保險':['保',170],
+  'BTS':['防',265],'演唱會':['演',285],'吉伊卡哇':['吉',335],'動漫':['漫',300],'扭蛋':['蛋',50],'夾娃娃':['夾',25],'訂閱':['訂',230],'出遊玩樂':['遊',180]
+};
+const INC = {'薪水':['薪',120],'退款':['退',140],'發票':['票',100],'彩票':['彩',80],'買賣':['賣',150],'其他收入':['收',130]};
+const PARTS = ['門票','住宿','交通','應援','周邊','吃喝','其他'];
+const HUES = [262,335,200,20,150,45];
+const WD = '日一二三四五六';
+const NUM = '〇一二三四五六七八九';
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad = n => String(n).padStart(2,'0');
+const ymd = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const pdate = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const addDays = (s,n) => { const d = pdate(s); d.setDate(d.getDate()+n); return ymd(d); };
+const diffDays = (a,b) => Math.round((pdate(b) - pdate(a)) / 864e5);
+const num = n => Math.round(n).toLocaleString('zh-TW');
+const money = n => '$' + num(n);
+const bigMoney = n => `<span class="yen">$</span>${num(n)}`;
+const md = s => { const d = pdate(s); return `${d.getMonth()+1}/${d.getDate()}`; };
+const wd = s => '週' + WD[pdate(s).getDay()];
+const kan = n => n <= 10 ? (n === 10 ? '十' : NUM[n]) : n < 20 ? '十' + NUM[n-10] : NUM[Math.floor(n/10)] + '十' + (n % 10 ? NUM[n % 10] : '');
+const shiftMonth = (ym, n) => { const [y,m] = ym.split('-').map(Number); const d = new Date(y, m-1+n, 1); return `${d.getFullYear()}-${pad(d.getMonth()+1)}`; };
+let TODAY = ymd(new Date());
+
+/* ---------- storage ---------- */
+function fresh(){ return {v:1, records:SEED.records.map(r=>({...r})), events:SEED.events.map(e=>({...e})), funCats:[...DEFAULT_FUN], funBudget:0, theme:'auto', custom:{}}; }
+function load(){
+  try { const raw = localStorage.getItem(KEY); if (raw) { const s = JSON.parse(raw); if (s && Array.isArray(s.records)) return Object.assign(fresh(), s); } } catch(e) {}
+  return fresh();
+}
+let storageOK = true;
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); storageOK = true; } catch(e) { storageOK = false; } }
+function migrate(s){
+  /* v2: 已付變成預設。舊資料裡未來日期的紀錄原本代表「要付」，轉成明確的待付 */
+  if ((s.v || 1) < 2){ s.records.forEach(r => { if (r.t === 'o' && !r.st && r.d > TODAY) r.st = 'due'; }); s.v = 2; }
+  return s;
+}
+let S = migrate(load());
+save();
+
+/* ---------- model ---------- */
+function cat(k, t){
+  const c = (t === 'i' ? INC[k] : CATS[k]) || CATS[k] || INC[k] || (S.custom[k] && [S.custom[k].e, S.custom[k].h]) || [String(k).slice(0,1), 40];
+  return {e:c[0], h:c[1]};
+}
+const isFun = k => S.funCats.includes(k);
+const icHTML = (k, t) => `<span class="ic ${t === 'i' ? 't-inc' : isFun(k) ? 't-fun' : ''}" aria-hidden="true">${esc(cat(k, t).e)}</span>`;
+/* 待付 when marked so, otherwise when the date is still ahead */
+/* 預設已付；標成待付才算待付。paid > 0 表示拆成已付＋待付兩部分 */
+const pending = r => r.t === 'o' && r.st === 'due';
+const owed = r => pending(r) ? Math.max(0, r.a - (r.paid||0)) : 0;
+const paidPart = r => pending(r) ? (r.paid||0) : r.a;
+const evById = id => S.events.find(e => e.id === id);
+/* 演唱會判斷：類別是演唱會、備註或活動名稱像演唱會、或 BTS 的門票 */
+const GIG_RE = /演唱會|演場會|巡演|音樂會|音樂祭|音樂節|見面會|fan ?meeting|concert|tour|\blive\b/i;
+const isGigRec = r => r.t === 'o' && (r.k === '演唱會' || GIG_RE.test(r.n || ''));
+function isGigEvent(e){
+  if (e.concert === true || e.concert === false) return e.concert;
+  if (GIG_RE.test(e.name)) return true;
+  return S.records.some(r => r.ev === e.id && (isGigRec(r) || (r.k === 'BTS' && r.p === '門票')));
+}
+function upcomingGigs(){
+  const evs = S.events.filter(e => e.e >= TODAY && isGigEvent(e)).map(e => ({ev:e.id, name:e.name, s:e.s, e:e.e, total:eventTotals(e).total}));
+  const rs = S.records.filter(r => !r.ev && r.d >= TODAY && isGigRec(r)).map(r => ({rec:r.id, name:r.n || '演唱會', s:r.d, e:r.d, total:r.a}));
+  return [...evs, ...rs].sort((a,b) => a.s.localeCompare(b.s));
+}
+function sumOf(list){
+  const o = {spent:0, owed:0, fun:0, inc:0, all:0};
+  for (const r of list){
+    if (r.t === 'i'){ o.inc += r.a; continue; }
+    o.all += r.a; o.spent += paidPart(r); o.owed += owed(r);
+    if (isFun(r.k)) o.fun += r.a;
+  }
+  return o;
+}
+function outCats(){ return [...new Set([...Object.keys(CATS), ...Object.keys(S.custom)])]; }
+function topCats(t){
+  const keys = t === 'i' ? Object.keys(INC) : outCats();
+  const from = addDays(TODAY, -180), cnt = {}, all = {};
+  for (const r of S.records){ if (r.t !== t) continue; all[r.k] = (all[r.k]||0) + 1; if (r.d >= from) cnt[r.k] = (cnt[r.k]||0) + 1; }
+  const extra = Object.keys(all).filter(k => !keys.includes(k));
+  return [...keys, ...extra].sort((a,b) => (cnt[b]||0) - (cnt[a]||0) || (all[b]||0) - (all[a]||0));
+}
+function eventTotals(ev){
+  const recs = S.records.filter(r => r.ev === ev.id);
+  const parts = {}; let total = 0, ow = 0;
+  for (const r of recs){ const p = r.p || '其他'; parts[p] = (parts[p]||0) + r.a; total += r.a; ow += owed(r); }
+  return {recs, parts, total, owed: ow};
+}
+const kDate = s => { const d = pdate(s); return `${kan(d.getMonth()+1)}月${kan(d.getDate())}日`; };
+const rangeTxt = ev => ev.s === ev.e ? `${md(ev.s)} ${wd(ev.s)}` : `${md(ev.s)} – ${md(ev.e)}`;
+
+/* ---------- ui ---------- */
+const ui = {tab:'list', ym: TODAY.slice(0,7), funRange:'month', statsView:'month', statsM: TODAY.slice(0,7)};
+const view = $('#view');
+const ICON = {
+  prev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+  next:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+  search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>',
+  mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>',
+  back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H8M12 7l-5 5 5 5"/></svg>'
+};
+const monthTitle = ym => `<span class="n">${Number(ym.slice(5))}</span>月`;
+
+function rowHTML(r, opts={}){
+  const c = cat(r.k, r.t);
+  const subs = [];
+  if (r.n) subs.push(esc(r.k));
+  if (opts.showDate) subs.push(md(r.d));
+  const ev = r.ev && evById(r.ev);
+  if (ev && !opts.hideEv) subs.push(`<span class="evtag">${esc(ev.name)}</span>`);
+  const due = pending(r);
+  let amt, cls = '';
+  if (r.t === 'i'){ amt = '+' + money(r.a); cls = 'inc'; }
+  else if (due){ cls = 'due'; amt = money(r.a) + (r.paid ? `<small>已付 ${money(r.paid)}</small>` : ''); }
+  else amt = money(r.a);
+  const stamp = due ? (r.paid ? '<span class="tag part">部分待付</span>' : '<span class="tag due">待付</span>') : '';
+  return `<button class="row" data-edit="${r.id}">${icHTML(r.k, r.t)}<span class="row-main"><span class="row-t">${esc(r.n || r.k)}</span>${subs.length ? `<span class="row-s">${subs.join('　')}</span>` : ''}</span>${stamp}<span class="row-a ${cls}">${amt}</span></button>`;
+}
+function dayHTML(d, rs){
+  const x = pdate(d), n = diffDays(TODAY, d);
+  const rel = n === 0 ? '今天' : n === -1 ? '昨天' : n === 1 ? '明天' : '';
+  const tot = rs.filter(r => r.t === 'o').reduce((a,r) => a + r.a, 0);
+  let h = `<section class="day" id="d-${d}"><div class="day-h"><span class="day-n">${x.getDate()}</span><span class="day-w">${wd(d)}${rel ? `<b>${rel}</b>` : ''}</span><span class="day-sum">${tot ? money(tot) : ''}</span><button class="day-add" data-addon="${d}" aria-label="在 ${md(d)} 記一筆">${ICON.plus}</button></div>`;
+  h += rs.length ? `<div class="card">${rs.map(r => rowHTML(r)).join('')}</div>` : `<div class="card"><button class="blank" data-addon="${d}"><span>今天還沒有紀錄</span><span>記一筆</span></button></div>`;
+  return h + `</section>`;
+}
+
+function gigHTML(gs){
+  const g = gs[0], n = diffDays(TODAY, g.s), on = TODAY >= g.s && TODAY <= g.e;
+  const when = on ? '<b>今天</b>' : n === 1 ? '<b>明天</b>' : `<b>${n}</b>天後`;
+  const date = g.e !== g.s ? `${md(g.s)}–${md(g.e)}` : `${md(g.s)} ${wd(g.s)}`;
+  return `<button class="gig" ${g.ev ? `data-event="${g.ev}"` : `data-edit="${g.rec}"`} aria-label="下一場演唱會 ${esc(g.name)}"><span class="gig-l">${ICON.mic}${on ? '進行中' : '演唱會'}</span><span class="gig-n">${esc(g.name)}</span><span class="gig-d">${date}</span><span class="gig-c">${when}</span>${gs.length > 1 ? `<span class="gig-more">還有 ${gs.length - 1} 場</span>` : ''}</button>`;
+}
+
+/* ---------- 明細：today first ---------- */
+function renderList(){
+  const ym = ui.ym, y = ym.slice(0,4);
+  const list = S.records.filter(r => r.d.startsWith(ym));
+  const s = sumOf(list);
+  const isNow = ym === TODAY.slice(0,7);
+  let h = `<header class="bar"><div class="titlerow"><h1>${monthTitle(ym)}</h1><span class="yr">${y}</span><div class="nav">
+    <button class="icon-btn" data-act="search" aria-label="搜尋">${ICON.search}</button>
+    <button class="icon-btn" data-act="prev" aria-label="上個月">${ICON.prev}</button>
+    <button class="icon-btn" data-act="next" aria-label="下個月">${ICON.next}</button></div></div></header>`;
+  const gigs = isNow ? upcomingGigs() : [];
+  h += `<section class="sum ${gigs.length ? 'has-gig' : ''}"><div><p class="sum-label">本月累積</p><p class="sum-big">${bigMoney(s.all)}</p><p class="sum-sub"><span>已付<b>${money(s.spent)}</b></span><span>待付<b>${money(s.owed)}</b></span>${s.inc ? `<span>收入<b>${money(s.inc)}</b></span>` : ''}</p></div>${gigs.length ? gigHTML(gigs) : ''}</section>`;
+
+  const groups = {};
+  list.forEach(r => { (groups[r.d] = groups[r.d] || []).push(r); });
+  const rev = d => (groups[d] || []).slice().reverse();
+  const past = Object.keys(groups).filter(d => d < TODAY).sort().reverse();
+  const later = Object.keys(groups).filter(d => d > TODAY).sort();
+
+  if (isNow) h += dayHTML(TODAY, rev(TODAY));
+  past.forEach(d => { h += dayHTML(d, rev(d)); });
+  if (later.length){
+    if (isNow || past.length) h += `<div class="later"><h2 class="sec">之後</h2><span class="muted">${later.length} 天</span></div>`;
+    later.forEach(d => { h += dayHTML(d, rev(d)); });
+  }
+  if (!isNow && !past.length && !later.length) h += `<div class="empty"><p>這個月沒有紀錄</p><button class="btn" data-act="add">記一筆</button></div>`;
+  return h;
+}
+
+/* ---------- 娛樂 ---------- */
+function renderFun(){
+  const month = ui.funRange === 'month';
+  const ym = ui.ym, y = ym.slice(0,4), m = Number(ym.slice(5));
+  const pref = month ? ym : y;
+  const list = S.records.filter(r => r.t === 'o' && isFun(r.k) && r.d.startsWith(pref));
+  const total = list.reduce((a,r) => a + r.a, 0);
+  const ow = list.reduce((a,r) => a + owed(r), 0);
+  const by = {};
+  list.forEach(r => { const o = by[r.k] = by[r.k] || {a:0, n:0}; o.a += r.a; o.n++; });
+  const cats = Object.entries(by).sort((a,b) => b[1].a - a[1].a);
+
+  let h = `<header class="bar"><div class="titlerow"><h1>娛樂</h1>${month ? `<span class="yr">${y}</span><div class="nav"><button class="icon-btn" data-act="prev" aria-label="上個月">${ICON.prev}</button><button class="icon-btn" data-act="next" aria-label="下個月">${ICON.next}</button></div>` : ''}</div></header>
+    <div class="seg" role="group" aria-label="範圍" style="margin-bottom:14px"><button data-range="month" aria-pressed="${month}">${monthTitle(ym)}</button><button data-range="year" aria-pressed="${!month}">${y} 全年</button></div>`;
+  const allOut = sumOf(S.records.filter(r => r.d.startsWith(pref))).all;
+  const share = allOut ? Math.round(total / allOut * 100) : 0;
+  const subs = [];
+  if (ow) subs.push(`<span>待付<b>${money(ow)}</b></span>`);
+  if (month){
+    const prev = S.records.filter(r => r.t === 'o' && isFun(r.k) && r.d.startsWith(shiftMonth(ym,-1))).reduce((a,r) => a + r.a, 0);
+    if (prev && total){ const d = total - prev; subs.push(`<span>${d >= 0 ? '比上月多' : '比上月少'}<b>${money(Math.abs(d))}</b></span>`); }
+    if (S.funBudget > 0) subs.push(total > S.funBudget ? `<span>超出預算<b>${money(total - S.funBudget)}</b></span>` : `<span>預算還剩<b>${money(S.funBudget - total)}</b></span>`);
+  }
+  h += `<section class="sum has-gig"><div><p class="sum-label">${month ? `${m} 月` : `${y} 年`}的娛樂</p><p class="sum-big">${bigMoney(total)}</p>${subs.length ? `<p class="sum-sub">${subs.join('')}</p>` : ''}</div><div class="side-box"><span class="gig-l">佔總支出</span><span class="side-v">${share}<small>%</small></span><span class="gig-d">共 ${money(allOut)}</span></div></section>`;
+
+  h += cats.length ? `<div class="card">` + cats.map(([k,o]) => { const c = cat(k);
+      return `<button class="row" data-catq="${esc(k)}">${icHTML(k,'o')}<span class="row-main"><span class="row-t">${esc(k)}</span><span class="row-s">${o.n} 筆</span></span><span class="row-a">${money(o.a)}<span class="row-pct">${Math.round(o.a/total*100)}%</span></span></button>`; }).join('') + `</div>`
+    : `<div class="empty"><p>${month ? '這個月沒有娛樂花費' : '今年沒有娛樂花費'}</p></div>`;
+
+  const evs = S.events.filter(e => month ? (e.s.slice(0,7) <= ym && e.e.slice(0,7) >= ym) : (e.s.startsWith(y) || e.e.startsWith(y)))
+    .sort((a,b) => b.s.localeCompare(a.s));
+  h += `<div class="sec-row"><h2 class="sec">活動</h2><button class="link" data-act="new-event">新增活動</button></div>`;
+  h += evs.length ? `<div class="tickets">${evs.map(e => ticketHTML(e)).join('')}</div>` : `<p class="hint">把門票、住宿、車費、應援物記到同一個活動，就能看到一場活動總共花了多少。</p>`;
+  return h;
+}
+/* 票券顏色：預設色票＋自訂 */
+const TK_COLORS = [['#F8DC6E','黃'],['#A8CFF4','藍'],['#C9B6F2','紫'],['#F7C3D6','粉'],['#F5B49A','珊瑚'],['#B9E3C6','薄荷'],['#E9E4D8','奶茶'],['#2B2D33','黑']];
+function tkColor(e){
+  if (e.col === 'y') return '#F8DC6E';
+  if (e.col === 'b') return '#A8CFF4';
+  if (/^#[0-9a-f]{6}$/i.test(e.col || '')) return e.col;
+  return S.events.indexOf(e) % 2 ? '#A8CFF4' : '#F8DC6E';
+}
+function inkFor(hex){
+  const [r,g,b] = [1,3,5].map(i => parseInt(hex.slice(i,i+2),16) / 255).map(c => c <= .03928 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4);
+  return .2126*r + .7152*g + .0722*b > .32 ? '#1F2024' : '#FFFFFF';
+}
+function swatchesHTML(cur){
+  const preset = TK_COLORS.some(([c]) => c.toLowerCase() === cur.toLowerCase());
+  return `<div class="swatches">${TK_COLORS.map(([c,l]) => `<button class="sw" data-sw="${c}" style="background:${c}" aria-label="${l}" aria-pressed="${c.toLowerCase() === cur.toLowerCase()}"></button>`).join('')}<label class="sw sw-custom" aria-pressed="${!preset}" style="${preset ? '' : `background:${cur}`}" aria-label="自訂顏色"><input type="color" data-swpick value="${cur}"></label></div>`;
+}
+function bindSwatches(root, onPick){
+  const set = c => { root.querySelectorAll('.sw').forEach(x => x.setAttribute('aria-pressed', x.dataset.sw ? x.dataset.sw.toLowerCase() === c.toLowerCase() : !TK_COLORS.some(([p]) => p.toLowerCase() === c.toLowerCase()))); const cu = root.querySelector('.sw-custom'); if (!TK_COLORS.some(([p]) => p.toLowerCase() === c.toLowerCase())) cu.style.background = c; onPick(c); };
+  root.addEventListener('click', ev => { const b = ev.target.closest('[data-sw]'); if (b){ ev.stopPropagation(); set(b.dataset.sw); } });
+  const pick = root.querySelector('[data-swpick]');
+  pick.addEventListener('input', () => set(pick.value));
+}
+function ticketHTML(e, isStatic){
+  const t = eventTotals(e);
+  const parts = PARTS.filter(p => t.parts[p]).map(p => `<span>${p}<b>${money(t.parts[p])}</b></span>`).join('');
+  const bg = tkColor(e), ink = inkFor(bg);
+  const no = S.events.slice().sort((a,b) => a.s.localeCompare(b.s)).indexOf(e) + 1;
+  const used = e.e < TODAY;
+  const tag = isStatic ? 'div' : 'button';
+  const dd = pdate(e.s);
+  return `<${tag} class="ticket ${used ? 'used' : ''} ${isStatic ? 'static' : ''}" style="--tk:${bg};--tk-ink:${ink}" ${isStatic ? '' : `data-event="${e.id}"`} aria-label="${esc(e.name)} ${rangeTxt(e)} ${money(t.total)}"><span class="tk-main"><span class="tk-head"><span class="tk-kind">${isGigEvent(e) ? "演唱會" : "入場券"}</span><span class="tk-no">No.${pad(no)}</span></span><span class="tk-name">${esc(e.name)}</span><span class="tk-total">${bigMoney(t.total)}</span>${parts ? `<span class="tk-parts">${parts}</span>` : `<span class="tk-parts"><span>還沒有紀錄</span></span>`}${t.owed ? `<span class="tag due tk-due">待付 ${money(t.owed)}</span>` : ''}${used ? '<span class="tk-used">已使用</span>' : ''}</span><span class="tk-stub" aria-hidden="true"><span class="tk-m">${dd.getMonth()+1}月</span><span class="tk-d">${dd.getDate()}</span><span class="tk-w">${wd(e.s)}</span>${e.e !== e.s ? `<span class="tk-to">至 ${md(e.e)}</span>` : ''}<span class="tk-code"></span></span></${tag}>`;
+}
+
+/* ---------- 統計 ---------- */
+const PIE = ['#F8DC6E','#A8CFF4','#F07F55','#6FA5DE','#F2C14B','#F5B49A','#CFE4F9','#C9C7BF'];
+function donutHTML(list, label, scope){
+  const by = {};
+  list.filter(r => r.t === 'o').forEach(r => { by[r.k] = (by[r.k]||0) + r.a; });
+  const cats = Object.entries(by).sort((a,b) => b[1] - a[1]);
+  if (!cats.length) return `<div class="empty"><p>${label}沒有紀錄</p></div>`;
+  const total = cats.reduce((a,[,v]) => a + v, 0);
+  const slices = cats.slice(0, 7).map(([k,a]) => ({k, a}));
+  const rest = cats.slice(7);
+  if (rest.length) slices.push({k:'其他', a: rest.reduce((x,[,a]) => x + a, 0), rest: rest.map(([k]) => k)});
+  let acc = 0; const gap = slices.length > 1 ? 0.7 : 0;
+  const arcs = slices.map((sl, i) => {
+    const pct = sl.a / total * 100, len = Math.max(0.01, pct - gap);
+    const c = `<circle cx="60" cy="60" r="44" fill="none" stroke="${PIE[i]}" stroke-width="24" pathLength="100" stroke-dasharray="${len} ${100 - len}" stroke-dashoffset="${-acc}" transform="rotate(-90 60 60)"/>`;
+    acc += pct; return c;
+  }).join('');
+  return `<div class="pie"><svg viewBox="0 0 120 120" role="img" aria-label="${label}各類別比例">${arcs}</svg><div class="pie-c"><span class="muted">${label}</span><b>${money(total)}</b></div></div>`
+    + `<div class="card">` + slices.map((sl, i) => `<button class="row" ${sl.rest ? '' : `data-catq="${esc(sl.k)}" data-catm="${scope}"`}><span class="dot" style="background:${PIE[i]}"></span><span class="row-main"><span class="row-t">${esc(sl.k)}</span>${sl.rest ? `<span class="row-s">${sl.rest.map(esc).join('、')}</span>` : ''}</span><span class="row-a">${money(sl.a)}<span class="row-pct">${Math.round(sl.a / total * 100)}%</span></span></button>`).join('') + `</div>`;
+}
+function renderStats(){
+  const yearView = ui.statsView === 'year';
+  const sel = ui.statsM, y = sel.slice(0,4), m = Number(sel.slice(5));
+  let h = `<header class="bar"><div class="titlerow">${yearView ? `<h1><span class="n">${y}</span>年</h1>` : `<h1>${monthTitle(sel)}</h1><span class="yr">${y}</span>`}<div class="nav"><button class="icon-btn" data-act="sprev" aria-label="${yearView ? '上一年' : '上個月'}">${ICON.prev}</button><button class="icon-btn" data-act="snext" aria-label="${yearView ? '下一年' : '下個月'}">${ICON.next}</button></div></div></header>`;
+  h += `<div class="seg view-seg" role="group" aria-label="統計範圍"><button data-sview="month" aria-pressed="${!yearView}">月統計</button><button data-sview="year" aria-pressed="${yearView}">年統計</button></div>`;
+
+  if (!yearView){
+    const list = S.records.filter(r => r.d.startsWith(sel));
+    const s = sumOf(list);
+    const days = new Set(list.filter(r => r.d <= TODAY).map(r => r.d)).size;
+    const dayCount = sel === TODAY.slice(0,7) ? Number(TODAY.slice(8)) : new Date(Number(y), m, 0).getDate();
+    h += `<section class="sum"><p class="sum-label">${m} 月支出</p><p class="sum-big">${bigMoney(s.all)}</p><p class="sum-sub"><span>平均每天<b>${money(s.spent / Math.max(1, dayCount))}</b></span><span>記帳<b>${days} 天</b></span><span>娛樂<b>${s.all ? Math.round(s.fun / s.all * 100) : 0}%</b></span></p></section>`;
+    h += donutHTML(list, `${m} 月`, sel);
+    const top = list.filter(r => r.t === 'o').sort((a,b) => b.a - a.a).slice(0,3);
+    if (top.length) h += `<h2 class="sec">${m} 月最大筆</h2><div class="card">${top.map(r => rowHTML(r, {showDate:true})).join('')}</div>`;
+    return h;
+  }
+
+  const months = Array.from({length:12}, (_,i) => `${y}-${pad(i+1)}`);
+  const tot = months.map(mm => S.records.filter(r => r.t === 'o' && r.d.startsWith(mm)).reduce((a,r) => a + r.a, 0));
+  const max = Math.max(1, ...tot), yt = tot.reduce((a,b) => a + b, 0), used = tot.filter(Boolean).length;
+  const ylist = S.records.filter(r => r.d.startsWith(y));
+  const ys = sumOf(ylist);
+  h += `<section class="sum"><p class="sum-label">${y} 年支出</p><p class="sum-big">${bigMoney(yt)}</p><p class="sum-sub"><span>每月平均<b>${money(yt / Math.max(1, used))}</b></span><span>娛樂<b>${ys.all ? Math.round(ys.fun / ys.all * 100) : 0}%</b></span></p></section>`;
+  h += `<h2 class="sec">每月支出</h2><div class="bars">${months.map((mm,i) => `<button data-sm="${mm}" aria-pressed="false" aria-label="${i+1}月 ${money(tot[i])}，看這個月"><span class="b" style="height:${tot[i] / max * 100}%"></span><span class="bl">${i+1}</span></button>`).join('')}</div><p class="hint">點月份可以看那個月的類別比例。</p>`;
+  h += `<h2 class="sec">類別比例</h2>` + donutHTML(ylist, `${y} 年`, y);
+  return h;
+}
+
+/* ---------- 設定 ---------- */
+function renderSettings(){
+  let h = `<header class="bar"><div class="titlerow"><h1>設定</h1></div></header>`;
+  h += `<h2 class="sec">哪些類別算娛樂</h2><div class="set set-pad"><div class="chips">${topCats('o').map(k => `<button class="chip" data-funcat="${esc(k)}" aria-pressed="${isFun(k)}">${esc(k)}</button>`).join('')}</div></div><p class="hint">選取的類別會算進「娛樂」和每月娛樂預算。</p>`;
+  h += `<h2 class="sec">每月娛樂預算</h2><div class="set"><label class="set-row"><span class="grow">預算金額</span><input class="numin" id="budget" inputmode="numeric" pattern="[0-9]*" placeholder="不設定" value="${S.funBudget || ''}"></label></div>`;
+  h += `<h2 class="sec">新增類別</h2><div class="set set-pad"><div class="search"><input class="txtin" id="newcat" placeholder="類別名稱，例如：寵物"><button class="btn" data-act="addcat" style="height:44px;padding:0 18px">新增</button></div></div><p class="hint">圖示會用名稱的第一個字。黃色是生活，藍色是娛樂。</p>`;
+  h += `<h2 class="sec">外觀</h2><div class="seg" role="group" aria-label="外觀">${[['auto','跟隨系統'],['light','淺色'],['dark','深色']].map(([v,l]) => `<button data-theme-set="${v}" aria-pressed="${S.theme === v}">${l}</button>`).join('')}</div>`;
+  h += `<h2 class="sec">資料</h2><div class="set">
+    <div class="set-row"><span class="grow">紀錄</span><span class="val">${S.records.length} 筆</span></div>
+    <button class="set-row act" data-act="export">匯出備份（JSON）</button>
+    <button class="set-row act" data-act="export-csv">匯出 Excel 用的 CSV</button>
+    <button class="set-row act" data-act="copy">複製備份文字</button>
+    <button class="set-row act" data-act="import">從備份還原</button>
+    <button class="set-row red" data-act="reset">重設回匯入的原始資料</button></div>
+    <p class="hint">${storageOK ? '資料存在這支手機的瀏覽器裡。偶爾匯出一次備份，換手機或清除 Safari 資料時才不會不見。' : '這個瀏覽器無法保存資料，關掉前請先匯出備份。'}</p>`;
+  h += `<h2 class="sec">加到 iPhone 主畫面</h2><div class="set set-pad"><ol class="steps"><li>用 Safari 打開這個頁面</li><li>點下方的分享按鈕</li><li>選「加入主畫面」，名稱會是「酥雞銀行」</li></ol></div><p class="hint">主畫面的 App 和 Safari 分開存資料。如果先在 Safari 記過帳，請先匯出備份，再到 App 裡還原。</p>`;
+  return h;
+}
+
+/* ---------- render ---------- */
+function render(keepScroll){
+  const y = window.scrollY;
+  view.innerHTML = ({list:renderList, fun:renderFun, stats:renderStats, settings:renderSettings})[ui.tab]();
+  document.querySelectorAll('.tab').forEach(t => { if (t.dataset.tab === ui.tab) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current'); });
+  if (keepScroll) window.scrollTo(0, y);
+  if (ui.tab === 'settings'){
+    const b = $('#budget');
+    b.addEventListener('change', () => { S.funBudget = Math.max(0, parseInt(b.value.replace(/\D/g,'')) || 0); save(); toast(S.funBudget ? `預算設為 ${money(S.funBudget)}` : '已取消預算'); });
+  }
+}
+function applyTheme(){ if (S.theme === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.dataset.theme = S.theme; }
+
+/* ---------- sheet ---------- */
+const sheet = $('#sheet');
+let sheetTimer;
+function openSheet(html, mount){
+  clearTimeout(sheetTimer);
+  sheet.innerHTML = `<div class="scrim" data-close></div><div class="panel" role="dialog" aria-modal="true"><div class="grab"></div>${html}</div>`;
+  sheet.hidden = false;
+  document.body.classList.add('lock');
+  requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add('open')));
+  mount && mount(sheet.querySelector('.panel'));
+}
+function closeSheet(then){
+  sheet.classList.remove('open');
+  document.body.classList.remove('lock');
+  sheetTimer = setTimeout(() => { sheet.hidden = true; sheet.innerHTML = ''; then && then(); }, 260);
+}
+
+/* ---------- add / edit ---------- */
+let D = null;
+function evalExpr(x){ if (!x) return 0; let t = 0; for (const m of x.matchAll(/([+−]?)(\d+)/g)) t += (m[1] === '−' ? -1 : 1) * Number(m[2]); return t; }
+function eventsFor(d){ return S.events.filter(e => e.s <= d && d <= e.e); }
+function autoEvent(){ if (D.evTouched || D.t !== 'o') return; const hit = eventsFor(D.d); D.ev = hit.length && isFun(D.k) ? hit[0].id : ''; }
+
+function openAdd(o = {}){
+  const r = o.id && S.records.find(x => x.id === o.id);
+  D = r ? {id:r.id, t:r.t, expr:String(r.a), d:r.d, k:r.k, n:r.n, ev:r.ev||'', p:r.p||'', paid:r.paid ? String(r.paid) : '', mode: r.st === 'due' ? (r.paid ? 'split' : 'due') : 'paid', evTouched:true}
+        : {t:'o', expr:'', d:o.d || TODAY, k:o.k || topCats('o')[0], n:'', ev:o.ev || '', p:'', paid:'', mode:'paid', evTouched: !!o.ev};
+  autoEvent();
+  const keys = ['1','2','3','del','4','5','6','+','7','8','9','−','00','0','save'];
+  openSheet(`<div class="sheet-head"><button class="l" data-close>取消</button><div class="seg" style="width:140px"><button data-type="o" aria-pressed="${D.t==='o'}">支出</button><button data-type="i" aria-pressed="${D.t==='i'}">收入</button></div>${D.id ? '<button class="r red" data-act="del-rec">刪除</button>' : '<span></span>'}</div>
+  <div class="sheet-body">
+    <div class="amt" id="ad-amt"></div>
+    <input class="note" id="ad-note" placeholder="備註" enterkeyhint="done" autocomplete="off" value="${esc(D.n)}">
+    <div class="sug" id="ad-sug"></div>
+    <p class="field-l">日期</p><div id="ad-date"></div>
+    <div id="ad-pay"></div>
+    <p class="field-l">類別</p><div class="cats" id="ad-cats"></div>
+    <div id="ad-ev"></div>
+  </div>
+  <div class="keypad">${keys.map(k => k === 'del' ? `<button class="key" data-key="del" aria-label="刪除一位">${ICON.back}</button>` : k === 'save' ? `<button class="key save" data-key="save" style="grid-column:span 2">${D.id ? '儲存' : '記下'}</button>` : `<button class="key ${k === '+' || k === '−' ? 'op' : ''}" data-key="${k}">${k}</button>`).join('')}</div>`, p => {
+    const note = p.querySelector('#ad-note');
+    note.addEventListener('keydown', e => { if (e.key === 'Enter') e.target.blur(); });
+    note.addEventListener('input', e => { D.n = e.target.value; });
+    updAll();
+  });
+}
+function updAmt(){
+  const v = evalExpr(D.expr), op = /[+−]/.test(D.expr);
+  $('#ad-amt').classList.toggle('inc', D.t === 'i');
+  $('#ad-amt').innerHTML = `<span class="amt-expr">${op ? esc(D.expr) + ' =' : ''}</span><span class="amt-v ${v ? (D.t === 'i' ? 'inc' : '') : 'zero'}">${D.t === 'i' && v ? '+' : ''}${bigMoney(v)}</span>`;
+}
+function updSug(){
+  const cnt = {};
+  S.records.forEach(r => { if (r.k === D.k && r.n && r.n.length <= 14) cnt[r.n] = (cnt[r.n]||0) + 1; });
+  const list = Object.entries(cnt).sort((a,b) => b[1] - a[1]).slice(0, 8).map(x => x[0]);
+  const el = $('#ad-sug');
+  el.innerHTML = list.map(n => `<button class="chip" data-sug="${esc(n)}">${esc(n)}</button>`).join('');
+  el.style.display = list.length ? '' : 'none';
+}
+function updDate(){
+  const y = addDays(TODAY, -1), other = D.d !== TODAY && D.d !== y;
+  const sameYear = D.d.slice(0,4) === TODAY.slice(0,4);
+  $('#ad-date').innerHTML = `<div class="chips"><button class="chip" data-date="${TODAY}" aria-pressed="${D.d === TODAY}">今天</button><button class="chip" data-date="${y}" aria-pressed="${D.d === y}">昨天</button><label class="chip date-pick" aria-pressed="${other}">${other ? `${sameYear ? '' : D.d.slice(0,4) + '/'}${md(D.d)} ${wd(D.d)}` : '選日期'}<input type="date" id="ad-dpick" value="${D.d}" aria-label="選日期"></label></div>`;
+  $('#ad-dpick').addEventListener('change', e => { if (e.target.value){ D.d = e.target.value; autoEvent(); updDate(); updPay(); updEv(); } });
+}
+function updPay(){
+  const box = $('#ad-pay');
+  if (D.t !== 'o'){ box.innerHTML = ''; return; }
+  const m = D.mode;
+  box.innerHTML = `<p class="field-l">付款</p><div class="pay"><div class="seg"><button data-mode="paid" aria-pressed="${m === 'paid'}">已付</button><button data-mode="due" aria-pressed="${m === 'due'}">待付</button><button data-mode="split" aria-pressed="${m === 'split'}">拆兩筆</button></div>${m === 'split' ? `<div class="split"><label>已付<input id="ad-paid" inputmode="numeric" pattern="[0-9]*" placeholder="0" value="${esc(D.paid)}"></label><span class="rest"><span class="tag due">待付</span><b id="ad-rest"></b></span></div>` : ''}</div>`;
+  const pi = $('#ad-paid'); if (pi) pi.addEventListener('input', e => { D.paid = e.target.value.replace(/\D/g,''); e.target.value = D.paid; updRest(); });
+  updRest();
+}
+function updRest(){ const el = $('#ad-rest'); if (el) el.textContent = money(Math.max(0, evalExpr(D.expr) - (parseInt(D.paid) || 0))); }
+function updCats(){
+  const list = topCats(D.t);
+  if (!list.includes(D.k)) list.unshift(D.k);
+  $('#ad-cats').innerHTML = list.map(k => { const c = cat(k, D.t); return `<button class="cat" data-cat="${esc(k)}" aria-pressed="${k === D.k}">${icHTML(k, D.t)}${esc(k)}</button>`; }).join('');
+}
+function updEv(){
+  const box = $('#ad-ev'), hits = eventsFor(D.d);
+  if (D.t !== 'o' || (!isFun(D.k) && !D.ev && !hits.length)){ box.innerHTML = ''; return; }
+  const near = S.events.slice().sort((a,b) => {
+    const ha = hits.includes(a) ? 0 : 1, hb = hits.includes(b) ? 0 : 1;
+    return ha - hb || Math.abs(diffDays(D.d, a.s)) - Math.abs(diffDays(D.d, b.s));
+  }).slice(0, 5);
+  if (D.ev && !near.find(e => e.id === D.ev)){ const e = evById(D.ev); if (e) near.unshift(e); }
+  let h = `<p class="field-l">算進活動</p><div class="chips"><button class="chip" data-ev="" aria-pressed="${!D.ev}">不算</button>${near.map(e => `<button class="chip" data-ev="${e.id}" aria-pressed="${D.ev === e.id}">${esc(e.name)}</button>`).join('')}<button class="chip dashed" data-act="new-event-inline">＋ 新活動</button></div>`;
+  if (D.ev){
+    if (!D.p) D.p = guessPart();
+    h += `<p class="field-l">這筆是</p><div class="chips">${PARTS.map(p => `<button class="chip" data-part="${p}" aria-pressed="${D.p === p}">${p}</button>`).join('')}</div>`;
+  }
+  box.innerHTML = h;
+}
+function guessPart(){
+  const n = D.n || '';
+  if (/票|場|演唱會|世運/.test(n)) return '門票';
+  if (/住宿|飯店|旅館|民宿/.test(n)) return '住宿';
+  if (/車|高鐵|捷運|計程|交通|機票/.test(n)) return '交通';
+  if (/應援|蝴蝶結|提袋|壓克力|包裝|膠|夾子|貼紙/.test(n)) return '應援';
+  if (['小吃','手搖'].includes(D.k)) return '吃喝';
+  if (D.k === '交通') return '交通';
+  if (['動漫','吉伊卡哇','扭蛋'].includes(D.k)) return '周邊';
+  return '其他';
+}
+function updAll(){ updAmt(); updSug(); updDate(); updPay(); updCats(); updEv(); }
+function key(k){
+  if (k === 'save') return commit();
+  let x = D.expr;
+  if (k === 'del') x = x.slice(0, -1);
+  else if (k === '+' || k === '−'){ if (!x) return; x = /[+−]$/.test(x) ? x.slice(0,-1) + k : x + k; }
+  else { const last = x.split(/[+−]/).pop(); if (last.length >= 7) return; if (last === '' && k === '00') return; if (last === '0') x = x.slice(0,-1); x += k; }
+  D.expr = x; updAmt(); updRest();
+}
+function commit(){
+  const a = evalExpr(D.expr);
+  if (!(a > 0)){ const el = $('#ad-amt'); el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); toast('先輸入金額'); return; }
+  D.n = $('#ad-note').value.trim();
+  const rec = {id: D.id || ('r' + Date.now().toString(36)), d:D.d, k:D.k, n:D.n, a, t:D.t};
+  if (D.t === 'o'){
+    if (D.ev){ rec.ev = D.ev; rec.p = D.p || guessPart(); }
+    const paid = parseInt(D.paid) || 0;
+    if (D.mode === 'due') rec.st = 'due';
+    if (D.mode === 'split' && paid < a){ rec.st = 'due'; if (paid > 0) rec.paid = paid; }
+  }
+  const before = S.records.slice(), evBefore = S.events.slice(), wasEdit = !!D.id;
+  let gigNote = '';
+  if (!wasEdit && rec.t === 'o' && !rec.ev && isGigRec(rec)){
+    let g = S.events.find(e => e.s <= rec.d && rec.d <= e.e && isGigEvent(e));
+    if (!g){ g = {id:'e' + Date.now().toString(36), name: rec.n || '演唱會', s: rec.d, e: rec.d, col: S.events.length % 2 ? 'b' : 'y', concert:true}; S.events.push(g); }
+    rec.ev = g.id; rec.p = '門票';
+    if (rec.d >= TODAY) gigNote = '，已放進演唱會提醒';
+  }
+  if (wasEdit){ const i = S.records.findIndex(x => x.id === D.id); S.records[i] = rec; }
+  else S.records.push(rec);
+  save();
+  closeSheet();
+  if (!wasEdit && ui.tab === 'list' && rec.d.slice(0,7) !== ui.ym) ui.ym = rec.d.slice(0,7);
+  render(true);
+  toast(`${wasEdit ? '已更新' : '已記下'}　${rec.n || rec.k} ${money(a)}${rec.st === 'due' ? (rec.paid ? '（部分待付）' : '（待付）') : ''}${gigNote}`, () => { S.records = before; S.events = evBefore; save(); render(true); });
+}
+
+/* ---------- events ---------- */
+function openEvent(id){
+  const e = evById(id); if (!e) return;
+  const t = eventTotals(e);
+  const groups = PARTS.filter(p => t.recs.some(r => (r.p || '其他') === p));
+  openSheet(`<div class="sheet-head"><button class="l" data-close>關閉</button><h3>活動</h3><button class="r" data-act="edit-event" data-id="${e.id}">編輯</button></div><div class="sheet-body">${ticketHTML(e, true)}<div class="tk-color" id="tk-color">${swatchesHTML(tkColor(e))}</div>
+    ${groups.map(p => { const rs = t.recs.filter(r => (r.p || '其他') === p).sort((a,b) => a.d.localeCompare(b.d)); return `<div class="sec-row"><h2 class="sec">${p}</h2><span class="sec">${money(rs.reduce((a,r) => a + r.a, 0))}</span></div><div class="card">${rs.map(r => rowHTML(r, {showDate:true, hideEv:true})).join('')}</div>`; }).join('')}
+    ${t.recs.length ? '' : '<p class="hint">還沒有紀錄。</p>'}
+    <button class="btn wide" data-act="add-to-event" data-id="${e.id}">在這個活動記一筆</button></div>`, p => {
+    bindSwatches(p.querySelector('#tk-color'), c => { e.col = c; save(); const tk = p.querySelector('.ticket.static'); tk.outerHTML = ticketHTML(e, true); render(true); });
+  });
+}
+function openEventForm(id, fromAdd){
+  const e = id ? evById(id) : {id:'', name:'', s:(fromAdd && D && D.d) || TODAY, e:(fromAdd && D && D.d) || TODAY, col: S.events.length % 2 ? 'b' : 'y'};
+  let hue = id ? tkColor(e) : TK_COLORS[S.events.length % 2][0];
+  const draft = fromAdd ? {...D} : null;
+  let gig = id ? isGigEvent(e) : !!(fromAdd && D && isGigRec({t:'o', k:D.k, n:D.n}));
+  openSheet(`<div class="sheet-head"><button class="l" data-close>取消</button><h3>${id ? '編輯活動' : '新增活動'}</h3><button class="r" id="ev-save">儲存</button></div><div class="sheet-body">
+    <p class="field-l">活動名稱</p><input class="txtin" id="ev-name" placeholder="例如：BTS 高雄世運" value="${esc(e.name)}">
+    <p class="field-l">開始</p><input class="txtin" type="date" id="ev-s" value="${e.s}">
+    <p class="field-l">結束</p><input class="txtin" type="date" id="ev-e" value="${e.e}">
+    <p class="field-l">票券顏色</p><div id="ev-hue">${swatchesHTML(hue)}</div>
+    <p class="field-l">演唱會提醒</p><div class="seg" id="ev-gig" style="max-width:200px"><button data-g="1" aria-pressed="${gig}">開</button><button data-g="0" aria-pressed="${!gig}">關</button></div>
+    <p class="hint">開啟後，活動還沒結束前會顯示在明細最上面的黃色卡片裡。活動期間內記的帳，也會自動建議算進這個活動。</p>
+    ${id ? `<button class="btn wide danger" id="ev-del">刪除活動</button><p class="hint" style="text-align:center">紀錄會保留，只是不再屬於這個活動。</p>` : ''}</div>`, p => {
+    bindSwatches(p.querySelector('#ev-hue'), c => { hue = c; });
+    p.querySelector('#ev-gig').addEventListener('click', ev => { const b = ev.target.closest('[data-g]'); if (!b) return; gig = b.dataset.g === '1'; p.querySelectorAll('[data-g]').forEach(x => x.setAttribute('aria-pressed', x === b)); });
+    p.querySelector('#ev-save').addEventListener('click', () => {
+      const name = p.querySelector('#ev-name').value.trim(); let s = p.querySelector('#ev-s').value, en = p.querySelector('#ev-e').value || s;
+      if (!name || !s){ toast('請填活動名稱和日期'); return; }
+      if (en < s) [s, en] = [en, s];
+      let target;
+      if (id){ Object.assign(e, {name, s, e:en, col:hue, concert:gig}); target = e; }
+      else { target = {id:'e' + Date.now().toString(36), name, s, e:en, col:hue, concert:gig}; S.events.push(target); }
+      save();
+      if (fromAdd) closeSheet(() => { D = draft; D.ev = target.id; D.evTouched = true; reopenAdd(); });
+      else closeSheet(() => { render(true); openEvent(target.id); });
+    });
+    const del = p.querySelector('#ev-del');
+    if (del) del.addEventListener('click', () => {
+      if (!confirm(`刪除「${e.name}」？紀錄會保留。`)) return;
+      S.events = S.events.filter(x => x.id !== e.id);
+      S.records.forEach(r => { if (r.ev === e.id){ delete r.ev; delete r.p; } });
+      save(); closeSheet(); render(true); toast('已刪除活動');
+    });
+  });
+}
+function reopenAdd(){
+  const keep = D;
+  openAdd(keep.id ? {id:keep.id} : {d:keep.d, k:keep.k, ev:keep.ev});
+  Object.assign(D, keep); $('#ad-note').value = D.n || '';
+  sheet.querySelectorAll('[data-type]').forEach(b => b.setAttribute('aria-pressed', b.dataset.type === D.t));
+  updAll();
+}
+
+/* ---------- search ---------- */
+function openSearch(q = '', scope = ''){
+  openSheet(`<div class="sheet-head"><button class="l" data-close>關閉</button><h3>搜尋</h3><span></span></div><div class="sheet-body"><input class="txtin" id="q" type="search" placeholder="備註或類別，例如：芙莉蓮" value="${esc(q)}" autocomplete="off"><div id="qres"></div></div>`, p => {
+    const inp = p.querySelector('#q'), out = p.querySelector('#qres');
+    const run = () => {
+      const v = inp.value.trim().toLowerCase();
+      if (!v){ out.innerHTML = '<p class="hint">可以查某個角色、某家店、某場活動總共花了多少。</p>'; return; }
+      const rs = S.records.filter(r => (!scope || r.d.startsWith(scope)) && ((r.n || '').toLowerCase().includes(v) || r.k.toLowerCase().includes(v))).sort((a,b) => b.d.localeCompare(a.d));
+      const tot = rs.filter(r => r.t === 'o').reduce((a,r) => a + r.a, 0);
+      const label = scope.length === 7 ? `${Number(scope.slice(5))} 月　` : scope ? `${scope} 年　` : '';
+      out.innerHTML = `<div class="found"><span>${label}${rs.length} 筆</span><span>共 ${money(tot)}</span></div>` + (rs.length ? `<div class="card">${rs.slice(0,200).map(r => rowHTML(r, {showDate:true})).join('')}</div>` : '');
+    };
+    inp.addEventListener('input', run); run();
+    if (!q) setTimeout(() => inp.focus(), 300);
+  });
+}
+
+/* ---------- backup ---------- */
+async function offerFile(filename, data){
+  try {
+    if (window.claude && typeof window.claude.use === 'function'){
+      const dl = await window.claude.use('downloads');
+      if (dl){ try { await dl.save({filename, data}); toast('已匯出'); return; } catch(e){ if (e && e.code === 'declined') return; } }
+    }
+  } catch(e){}
+  try {
+    const url = URL.createObjectURL(new Blob([data], {type: filename.endsWith('.csv') ? 'text/csv' : 'application/json'}));
+    const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    toast('已匯出');
+  } catch(e){ copyText(data); }
+}
+async function copyText(t){ try { await navigator.clipboard.writeText(t); toast('已複製，可以貼到備忘錄保存'); } catch(e){ toast('無法複製，請改用匯出'); } }
+const backupJSON = () => JSON.stringify({app:'sujibank', ...S});
+function csv(){
+  const rows = [['日期','收入/支出','類別','備註','合計','付款','活動','活動項目']];
+  S.records.slice().sort((a,b) => b.d.localeCompare(a.d)).forEach(r => rows.push([r.d, r.t === 'i' ? '收入' : '支出', r.k, r.n || '', r.t === 'i' ? r.a : -r.a, r.t === 'i' ? '' : pending(r) ? (r.paid ? `已付${r.paid}／待付${r.a - r.paid}` : '待付') : '已付', r.ev ? (evById(r.ev)||{}).name || '' : '', r.p || '']));
+  return '\ufeff' + rows.map(r => r.map(v => /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g,'""')}"` : v).join(',')).join('\n');
+}
+$('#importer').addEventListener('change', async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try {
+    const s = JSON.parse(await f.text());
+    if (!s || !Array.isArray(s.records)) throw 0;
+    if (!confirm(`還原會把目前的 ${S.records.length} 筆紀錄換成備份裡的 ${s.records.length} 筆。要繼續嗎？`)) return;
+    delete s.app; S = migrate(Object.assign(fresh(), s)); save(); applyTheme(); render(); toast('已還原備份');
+  } catch(err){ toast('這個檔案不是酥雞銀行的備份'); }
+});
+
+/* ---------- toast ---------- */
+let toastT;
+function toast(msg, undo){
+  const t = $('#toast');
+  t.innerHTML = `<span>${esc(msg)}</span>${undo ? '<button>復原</button>' : ''}`;
+  if (undo) t.querySelector('button').onclick = () => { undo(); t.classList.remove('show'); };
+  t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), undo ? 5000 : 2600);
+}
+
+/* ---------- wiring ---------- */
+document.addEventListener('click', e => {
+  const b = e.target.closest('button,[data-close]');
+  if (!b) return;
+  const d = b.dataset;
+  if ('close' in d) return closeSheet();
+  if (d.tab){ ui.tab = d.tab; if (d.tab === 'list') ui.ym = ui.ym || TODAY.slice(0,7); render(); window.scrollTo(0,0); return; }
+  if (d.key) return key(d.key);
+  if (d.type){ D.t = d.type; D.k = topCats(D.t)[0]; if (D.t === 'i') D.ev = ''; sheet.querySelectorAll('[data-type]').forEach(x => x.setAttribute('aria-pressed', x === b)); return updAll(); }
+  if (d.mode){ D.mode = d.mode; updPay(); if (D.mode === 'split'){ const pi = $('#ad-paid'); pi && pi.focus(); } return; }
+  if (d.cat){ D.k = d.cat; autoEvent(); updCats(); updSug(); updEv(); return; }
+  if (d.date){ D.d = d.date; autoEvent(); updDate(); updPay(); updEv(); return; }
+  if (d.sug){ $('#ad-note').value = d.sug; D.n = d.sug; if (D.ev){ D.p = guessPart(); updEv(); } return; }
+  if (d.ev !== undefined && b.closest('#ad-ev')){ D.ev = d.ev; D.evTouched = true; D.p = ''; return updEv(); }
+  if (d.part){ D.p = d.part; return updEv(); }
+  if (d.edit){ const go = () => openAdd({id:d.edit}); return sheet.hidden ? go() : closeSheet(go); }
+  if (d.addon) return openAdd({d:d.addon});
+  if (d.event) return openEvent(d.event);
+  if (d.range){ ui.funRange = d.range; return render(true); }
+  if (d.sm){ ui.statsM = d.sm; ui.statsView = 'month'; render(); window.scrollTo(0,0); return; }
+  if (d.sview){ ui.statsView = d.sview; return render(true); }
+  if (d.catq) return openSearch(d.catq, d.catm || (ui.tab === 'fun' ? (ui.funRange === 'month' ? ui.ym : ui.ym.slice(0,4)) : ''));
+  if (d.funcat){ const k = d.funcat; S.funCats = isFun(k) ? S.funCats.filter(x => x !== k) : [...S.funCats, k]; save(); b.setAttribute('aria-pressed', isFun(k)); return; }
+  if (d.themeSet){ S.theme = d.themeSet; save(); applyTheme(); return render(true); }
+  switch (d.act){
+    case 'add': return openAdd();
+    case 'prev': ui.ym = shiftMonth(ui.ym, -1); return render();
+    case 'next': ui.ym = shiftMonth(ui.ym, 1); return render();
+    case 'sprev': case 'snext': { const dir = d.act === 'sprev' ? -1 : 1; ui.statsM = ui.statsView === 'year' ? `${Number(ui.statsM.slice(0,4)) + dir}${ui.statsM.slice(4)}` : shiftMonth(ui.statsM, dir); return render(true); }
+    case 'search': return openSearch();
+    case 'new-event': return openEventForm();
+    case 'new-event-inline': D.n = $('#ad-note').value; return closeSheet(() => openEventForm('', true));
+    case 'edit-event': return closeSheet(() => openEventForm(d.id));
+    case 'add-to-event': { const ev = evById(d.id); const day = TODAY >= ev.s && TODAY <= ev.e ? TODAY : ev.s; return closeSheet(() => openAdd({ev:ev.id, d:day, k: ev.name.includes('BTS') ? 'BTS' : undefined})); }
+    case 'del-rec': {
+      const before = S.records.slice(), r = S.records.find(x => x.id === D.id);
+      S.records = S.records.filter(x => x.id !== D.id); save(); closeSheet(); render(true);
+      return toast(`已刪除　${r.n || r.k}`, () => { S.records = before; save(); render(true); });
+    }
+    case 'addcat': {
+      const name = $('#newcat').value.trim();
+      if (!name) return toast('請輸入類別名稱');
+      if (CATS[name] || S.custom[name]) return toast('已經有這個類別');
+      S.custom[name] = {e: name.slice(0,1), h: Math.floor(Math.random() * 360)}; save(); render(true); return toast(`已新增「${name}」`);
+    }
+    case 'export': return offerFile(`酥雞銀行備份-${TODAY}.json`, backupJSON());
+    case 'export-csv': return offerFile(`酥雞銀行記帳-${TODAY}.csv`, csv());
+    case 'copy': return copyText(backupJSON());
+    case 'import': return $('#importer').click();
+    case 'reset':
+      if (confirm('重設會清除你在這裡新增或修改的紀錄，回到一開始匯入的 Excel 資料。要繼續嗎？')){ S = migrate(Object.assign(fresh(), {theme:S.theme})); save(); render(); toast('已重設'); }
+      return;
+  }
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden){ const t = ymd(new Date()); if (t !== TODAY){ TODAY = t; ui.ym = t.slice(0,7); render(); } } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sheet.hidden) closeSheet(); });
+
+applyTheme();
+render();
+})();
+</script>
+</body>
+</html>
