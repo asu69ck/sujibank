@@ -1,5 +1,6 @@
 /* 酥雞銀行：離線快取
-   打開時先用存起來的版本（很快），同時在背景抓最新版，下次打開就會是新的。 */
+   打開時先用存起來的版本（很快），同時在背景抓最新版，下次打開就會是新的。
+   Google 字型存過一次就直接從手機讀。 */
 const CACHE = 'sujibank-v2';
 const SHELL = ['./', './index.html'];
 const FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
