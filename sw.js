@@ -1,7 +1,8 @@
 /* 酥雞銀行：離線快取
-   有網路時抓最新版並存起來；沒網路（或網路太慢）時改用存起來的版本。 */
-const CACHE = 'sujibank-v1';
+   打開時先用存起來的版本（很快），同時在背景抓最新版，下次打開就會是新的。 */
+const CACHE = 'sujibank-v2';
 const SHELL = ['./', './index.html'];
+const FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -17,22 +18,35 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   const req = e.request;
-  // 只處理自己網站的讀取；Google 試算表的同步不經過這裡
-  if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+
+  if (FONT_HOSTS.includes(url.hostname)) {
+    e.respondWith((async () => {
+      const cache = await caches.open(CACHE);
+      const hit = await cache.match(req);
+      if (hit) return hit;
+      const res = await fetch(req);
+      if (res && (res.ok || res.type === 'opaque')) cache.put(req, res.clone());
+      return res;
+    })());
+    return;
+  }
+
+  if (url.origin !== self.location.origin) return;
+
   e.respondWith((async () => {
     const cache = await caches.open(CACHE);
-    try {
-      const res = await Promise.race([
-        fetch(req.url, {cache: 'no-cache'}),
-        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 4000))
-      ]);
+    const cached = (await cache.match(req, {ignoreSearch: true}))
+      || (req.mode === 'navigate' && ((await cache.match('./index.html')) || (await cache.match('./'))));
+    const net = fetch(req.url, {cache: 'no-cache'}).then(res => {
       if (res && res.ok) cache.put(req, res.clone());
       return res;
-    } catch (err) {
-      return (await cache.match(req, {ignoreSearch: true}))
-          || (await cache.match('./index.html'))
-          || (await cache.match('./'))
-          || Response.error();
+    });
+    if (cached) {
+      e.waitUntil(net.catch(() => {}));
+      return cached;
     }
+    try { return await net; } catch (err) { return Response.error(); }
   })());
 });
